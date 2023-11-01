@@ -2,7 +2,15 @@ import React from 'react'
 
 function NavBar() {
   return (
-    <div>NavBar</div>
+    <nav>
+      <ul>
+        <li>Recomandations</li>
+        <li>Top Anime</li>
+        <li>List It</li>
+        <li>To Watch</li>
+        <li>Watched</li>
+      </ul>
+    </nav>
   )
 }
 

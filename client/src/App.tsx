@@ -1,6 +1,7 @@
-import Axios from 'axios'
-import { useEffect, useState } from 'react';
-import Anime from './components/Anime';
+import Axios from "axios";
+import { useEffect, useState } from "react";
+import Anime from "./components/Anime";
+import NavBar from "./components/NavBar";
 
 interface Animes {
   mal_id: number;
@@ -13,22 +14,31 @@ function App() {
 
   useEffect(() => {
     getRecomendations();
-  }, [])
+  }, []);
 
   const getRecomendations = async () => {
-    const response = await Axios.get('http://127.0.0.1:5000/recomendations');
+    const response = await Axios.get("http://127.0.0.1:5000/recomendations");
     const animes = response.data;
     setAnimes(animes);
-  }
+  };
 
-  if(animes) {
+  if (animes) {
     return (
-      <div className='recomendations'>
-        {animes.map((anime) => (<Anime key={anime.mal_id} mal_id={anime.mal_id} title={anime.title} image={anime.image}/>))}
-      </div>
-    )
+      <>
+        <NavBar/>
+        <div className="recomendations">
+          {animes.map((anime) => (
+            <Anime
+              key={anime.mal_id}
+              mal_id={anime.mal_id}
+              title={anime.title}
+              image={anime.image}
+            />
+          ))}
+        </div>
+      </>
+    );
   }
-
 }
 
-export default App
+export default App;
