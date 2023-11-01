@@ -1,13 +1,7 @@
 import "./Anime.css"
 
-interface Anime {
-    mal_id: number;
-    title: string;
-    image: string;
-}
-
-function Anime({mal_id, title, image}: Anime) {
-    function anime(id: number) {
+function Anime({mal_id, title, image}) {
+    function anime(id) {
         console.log(id);
     }
 
