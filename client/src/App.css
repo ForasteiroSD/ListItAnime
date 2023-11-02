@@ -1,21 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
 body {
     margin: 0;
     padding: 0;
     background-color: #F8F9FB;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-}
-
-#root {
-    position: relative;
-    height: 100%;
-}
-
-.recomendations {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 3rem;
 }
