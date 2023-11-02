@@ -6,6 +6,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import NotFound from "./components/NotFound";
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
         <Route path="/topanimes" />
         <Route path="/listit" />
         <Route path="/towatch" />
-        <Route path="*" />
+        <Route path="/watched" />
+        <Route path="*" element={<NotFound />}/>
       </Routes>
     </Router>
   )
