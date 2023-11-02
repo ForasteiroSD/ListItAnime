@@ -1,0 +1,44 @@
+.menu {
+    position: relative;
+    top: 1.5em;
+    margin: 0 auto;
+    width: 70%;
+    border: 2px solid #EFEFF1;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.menu ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.menu li {
+    display: inline;
+    width: 15%;
+    position: relative;
+    margin: 0 auto;
+    padding: 1em 0;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #272D37;
+}
+
+.menu .selected {
+    color: #574EFA;
+}
+
+.menu .highlight {
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: 0;
+    background-color: #574EFA;
+}

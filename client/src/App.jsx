@@ -1,29 +1,28 @@
-import Axios from 'axios'
-import { useEffect, useState } from 'react';
-import Anime from './components/Anime';
-import './App.css'
+import "./App.css";
+import NavBar from "./components/NavBar";
+import Animes from "./components/Animes"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+import NotFound from "./components/NotFound";
 
 function App() {
-  const [animes, setAnimes] = useState();
 
-  useEffect(() => {
-    getRecomendations();
-  }, [])
-
-  const getRecomendations = async () => {
-    const response = await Axios.get('http://127.0.0.1:5000/recomendations');
-    const animes = response.data;
-    setAnimes(animes);
-  }
-
-  if(animes) {
-    return (
-      <div className='recomendations'>
-        {animes.map((anime) => (<Anime key={anime.mal_id} mal_id={anime.mal_id} title={anime.title} image={anime.image}/>))}
-      </div>
-    )
-  }
-
+  return (
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Animes />} />
+        <Route path="/topanimes" />
+        <Route path="/listit" />
+        <Route path="/towatch" />
+        <Route path="/watched" />
+        <Route path="*" element={<NotFound />}/>
+      </Routes>
+    </Router>
+  )
 }
 
-export default App
+export default App;
