@@ -13,7 +13,7 @@
 
 .showinfoanime .info {
     position: absolute;
-    width: 50%;
+    width: 900px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -85,21 +85,20 @@
     background-color: #574EFA;
 }
 
-@media (max-width: 1825px) {
+@media (max-width: 1000px) {
     .showinfoanime .info {
-        position: fixed;
         flex-direction: column;
         align-items: center;
         padding-left: 2rem;
-        top: 2rem;
-        transform: translate(-50%, 0);
+        padding-bottom: 2rem;
+        width: 90%;
     }
 
     .showinfoanime .info figure {
-        margin-top: 1rem;
+        height: 300px;
     }
-
-    .showinfoanime .info img{
+    .showinfoanime .info img {
+        margin-top: 1rem;
         border-radius: 0;
     }
 
@@ -108,13 +107,10 @@
     }
 }
 
-@media (max-width: 800px) {
+@media (max-height: 868px) {
 
-    .showinfoanime .info figure {
-        height: 400px;
-    }
-
-    .showinfoanime .info img{
-        border-radius: 0;
+    .showinfoanime .info {
+        top: 0;
+        transform: translate(-50%, 0%);
     }
 }
