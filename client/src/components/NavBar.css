@@ -3,9 +3,9 @@
     top: 1.5em;
     margin: 0 auto;
     width: 70%;
-    border: 2px solid #EFEFF1;
+    border: 2px solid var(--border-nav);
     border-radius: 15px;
-    background-color: white;
+    background-color: var(--background-nav);
 }
 
 .menu ul {
@@ -28,11 +28,11 @@
 
 .menu a {
     text-decoration: none;
-    color: #272D37;
+    color: var(--text);
 }
 
 .menu .selected {
-    color: #574EFA;
+    color: var(--highlight);
 }
 
 .menu .highlight {
@@ -40,5 +40,5 @@
     height: 3px;
     position: absolute;
     bottom: 0;
-    background-color: #574EFA;
+    background-color: var(--highlight);
 }

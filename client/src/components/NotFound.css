@@ -13,6 +13,6 @@
 }
 
 .notfound a {
-    text-decoration: underline #574EFA;
-    color: #574EFA;
+    text-decoration: underline var(--highlight);
+    color: var(--highlight);
 }

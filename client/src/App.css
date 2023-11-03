@@ -1,7 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --background: #F8F9FB;
+    --white: white;
+    --border-nav: #EFEFF1;
+    --text: #272D37;
+    --background-nav: white;
+    --highlight :#574EFA;
+}
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #F8F9FB;
+    background-color: var(--background);
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    color: var(--text);
+}
+
+.toggleMode {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--white);
+    border: 1px solid var(--border-nav);
+    border-radius: 999999px;
+    cursor: pointer;
+}
+
+.toggleMode svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 1px;
+    fill: var(--text);
 }
