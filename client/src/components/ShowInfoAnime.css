@@ -13,7 +13,7 @@
 
 .showinfoanime .info {
     position: absolute;
-    width: 900px;
+    width: 950px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -25,12 +25,30 @@
     gap: 2rem;
 }
 
+.showinfoanime .info .closeButton {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background-color: var(--background-nav);
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+}
+
+.showinfoanime .info .closeButton svg {
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-top: 2px;
+    fill: var(--text);
+}
+
 .showinfoanime .info figure {
     height: 600px;
     margin: 0 0 0 -1px;
 }
 
 .showinfoanime .info img{
+    max-width: 440px;
     height: 100%;
     border-radius: 20px 0 0 20px;
     object-fit: cover;
@@ -40,6 +58,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    min-width: 490px;
+}
+
+.showinfoanime .data .sinopse{
+    max-height: 300px;
+    overflow-y: scroll;
+    padding-right: 0.5rem;
 }
 
 .showinfoanime a {
@@ -74,6 +99,7 @@
     background-color: var(--background-nav);
     cursor: pointer;
     padding: 1rem;
+    margin-bottom: 1rem;
     font-size: 1.3rem;
 }
 
@@ -90,8 +116,11 @@
         flex-direction: column;
         align-items: center;
         padding-left: 2rem;
-        padding-bottom: 2rem;
         width: 90%;
+    }
+
+    .showinfoanime .info .data {
+        min-width: none;
     }
 
     .showinfoanime .info figure {
@@ -107,7 +136,7 @@
     }
 }
 
-@media (max-height: 868px) {
+@media (max-height: 868px) and (max-width: 580px) {
 
     .showinfoanime .info {
         top: 0;

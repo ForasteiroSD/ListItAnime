@@ -43,15 +43,19 @@ app.get("/animes", async(req, res) => {
         });
         answer = getUniqueListBy(answer, 'mal_id');
         res.send(answer);
-    } catch (err) {
-      throw new Error(err.message)
+    } catch (error) {
+        res.send([]);
     }
 
 });
 
 
 app.get("/anime", async(req, res) => {
-    const { id } = req.query;
-    const response = await Axios.get('https://api.jikan.moe/v4/anime/' + id);
-    res.send(response.data.data);
+    try {
+        const { id } = req.query;
+        const response = await Axios.get('https://api.jikan.moe/v4/anime/' + id);
+        res.send(response.data.data);
+    } catch (error) {
+        res.send([]);
+    }
 });
