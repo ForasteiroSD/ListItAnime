@@ -15,15 +15,11 @@
     gap: 20px;
 }
 
-h2 {
-    margin: 0;
-}
-
 .animeBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 2rem 60px 2rem 60px;
+    margin: calc(2rem + 21px) 60px 2rem 60px;
 }
 
 .animeName {
@@ -32,6 +28,7 @@ h2 {
     font-size: 35px;
     font-weight: 300;
     font-family: Raleway;
+    margin: 0;
 }
 
 .boxSearchBar {
@@ -39,19 +36,20 @@ h2 {
     align-items: center;
     padding: 6px;
     border-radius: 10px;
-    border: 2px solid #EFEFF1;
-    background-color: white;
+    border: 2px solid var(--border-nav);
+    background-color: var(--background-nav);
 }
 
 .searchBar {
-    background-color: white;
+    background-color: var(--background-nav);
     border: 0;
     outline: none;
+    color: var(--text);
 }
 
 .searchIcon {
     transform: scale(1.15);
-    color: #272D37;
+    color: var(--text);
 }
 
 .closeIcon {

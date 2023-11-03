@@ -14,7 +14,9 @@ import './Animes.css';
 function Animes() {
   const [animes, setAnimes] = useState();
   const [buffer, setBuffer] = useState('');
-  const [searchInterval, setSearchInterval] = useState(null);
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [animeName, setAnimeName] = useState('');
+  const [searchIcon, setSearchIcon] = useState(<Ai.AiOutlineSearch className="searchIcon"/>);
   const [modalOpen, setModalOpen] = useState(false);
   const getRecomendations = async () => {
     const response = await Axios.get('http://127.0.0.1:5000/animes');
@@ -63,7 +65,8 @@ function Animes() {
         </div>
 
         <div className="animes">
-          {animes.map((anime) => (
+          {animes.length > 0 ? (
+          animes.map((anime) => (
             <Anime
               key={anime.mal_id}
               mal_id={anime.mal_id}
@@ -72,7 +75,9 @@ function Animes() {
               modalOpen={modalOpen}
               setModalOpen={setModalOpen}
             />
-          ))}
+          ))) : (
+            <h2>Sorry, we could not find this anime.</h2>
+          )}
         </div>
       </>
     );
