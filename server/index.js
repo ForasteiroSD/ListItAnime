@@ -28,25 +28,18 @@ app.get("/search", async(req, res) => {
 });
 
 app.get("/animes", async(req, res) => {
-    function getUniqueListBy(arr, key) {
-        return [...new Map(arr.map(item => [item[key], item])).values()]
-    }
-
     try {
-        const response = await Axios.get('https://api.jikan.moe/v4/recommendations/anime');
-        const dados = response.data.data;
+        let response = await Axios.get('https://api.jikan.moe/v4/seasons/now');
+        let dados = response.data.data;
         let answer = [];
         dados.forEach(anime => {
-            answer.push({ "mal_id": anime.entry[0].mal_id, "title": anime.entry[0].title, "image": anime.entry[0].images.webp.large_image_url });
-            answer.push({ "mal_id": anime.entry[1].mal_id, "title": anime.entry[1].title, "image": anime.entry[1].images.webp.large_image_url });
-            
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url });
+
         });
-        answer = getUniqueListBy(answer, 'mal_id');
         res.send(answer);
     } catch (error) {
         res.send([]);
     }
-
 });
 
 

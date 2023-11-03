@@ -18,10 +18,11 @@ function Animes() {
   const [animeName, setAnimeName] = useState('');
   const [searchIcon, setSearchIcon] = useState(<Ai.AiOutlineSearch className="searchIcon"/>);
   const [modalOpen, setModalOpen] = useState(false);
+
   const getRecomendations = async () => {
     const response = await Axios.get('http://127.0.0.1:5000/animes');
     const animes = response.data;
-    setAnimeName('YOU MIGHT LIKE...');
+    setAnimeName('THIS SEASON ANIME...');
     setAnimes(animes);
   }
 
@@ -46,7 +47,8 @@ function Animes() {
       } else {
         const response = await Axios.get('http://127.0.0.1:5000/search?name=' + buffer.replaceAll(' ', '+'));
         const animes = response.data;
-        setAnimeName('RESULTS FOR: ' + buffer);
+        if(buffer.length > 30) setAnimeName('RESULTS FOR: ' + buffer.slice(0, 31) + '...');
+        else setAnimeName('RESULTS FOR: ' + buffer);
         setAnimes(animes);
       }
     }, 750);
