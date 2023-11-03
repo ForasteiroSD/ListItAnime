@@ -9,9 +9,13 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen }) {
 
   const getAnime = async (id) => {
     if (!modalOpen) {
+      try {
+        const response = await Axios.get("http://127.0.0.1:5000/anime?id=" + id);
+        setAnime(response.data);
+      } catch (error) {
+        console.log('Too many requests');
+      }
       setModalOpen(true);
-      const response = await Axios.get("http://127.0.0.1:5000/anime?id=" + id);
-      setAnime(response.data);
       setShow(!show);
     }
   };

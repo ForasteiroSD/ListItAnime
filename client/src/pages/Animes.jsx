@@ -10,13 +10,13 @@ function Animes() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const getRecomendations = async () => {
-    try {
-      const response = await Axios.get("http://127.0.0.1:5000/animes");
-      const animes = response.data;
-      setAnimes(animes);
-    } catch (error) {
-      console.log(error);
+    const response = await Axios.get("http://127.0.0.1:5000/animes");
+    if(response.data.lenght === 0) {
+      return (
+        <h1>Something went wrong. Try again</h1>
+      )
     }
+    setAnimes(response.data);
   };
 
   const searchAnimes = async (e) => {
@@ -59,24 +59,16 @@ function Animes() {
           onBlur={cancelSearchAnimes}
         />
         <div className="animes">
-          {animes === 429 ? (
-            <h1>
-              To many requests. Wait sometime to use the application again
-            </h1>
-          ) : animes === 500 ? (
-            <h1>Something didn't work. Try again later.</h1>
-          ) : (
-            animes.map((anime) => (
-              <Anime
-                key={anime.mal_id}
-                mal_id={anime.mal_id}
-                title={anime.title}
-                image={anime.image}
-                modalOpen={modalOpen}
-                setModalOpen={setModalOpen}
-              />
-            ))
-          )}
+          {animes.map((anime) => (
+            <Anime
+              key={anime.mal_id}
+              mal_id={anime.mal_id}
+              title={anime.title}
+              image={anime.image}
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+            />
+          ))}
         </div>
       </>
     );
