@@ -42,6 +42,10 @@
     margin: 0 auto;
 }
 
+.login form .signUp {
+    min-height: 43rem;
+}
+
 .login form .login-data h1{
     font-size: 2.5rem;
     margin-bottom: 0;
@@ -51,6 +55,21 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.login form .signUp .inputs{
+    gap: 7px;
+}
+
+.login form .login-data .inputs .alert{
+    margin-top: 10px;
+    color: #B02817;
+}
+
+
+.login form .login-data .inputs .password{
+    margin-top: 0px;
+    color: #B02817;
 }
 
 .login .login-data input {
