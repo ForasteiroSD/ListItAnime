@@ -19,16 +19,10 @@ function Animes() {
   const [searchIcon, setSearchIcon] = useState(<Ai.AiOutlineSearch className="searchIcon"/>);
   const [modalOpen, setModalOpen] = useState(false);
 
-  function PromiseTimeout(delayms) {
-    return new Promise(function (resolve, reject) {
-        setTimeout(resolve, delayms);
-    });
-  }
-
   async function getRecomendations() {
-    setAnimeName('THIS SEASON ANIME...');
     const response = await Axios.get('http://127.0.0.1:5000/animes');
     let animes = response.data;
+    setAnimeName('THIS SEASON ANIME...');
     setAnimes(animes);
   }
 
