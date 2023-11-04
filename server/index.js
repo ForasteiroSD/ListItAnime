@@ -38,6 +38,11 @@ app.get("/animes", async(req, res) => {
         dados.forEach(anime => {
             answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url });
         });
+        response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=3');
+        dados = response.data.data;
+        dados.forEach(anime => {
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url });
+        });
         res.send(answer);
     } catch (error) {
         res.send([]);

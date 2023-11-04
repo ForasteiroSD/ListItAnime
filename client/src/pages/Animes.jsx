@@ -69,15 +69,15 @@ function Animes() {
   if(animes) {
     return (
       <>
+      <div className="animes">
         <div className="animeBar">
-          <h2 className="animeName" onClick={getRecomendations}>{animeName}</h2>
+          <h2 className="animeName">{animeName}</h2>
           <div className="boxSearchBar">
             <input type="text" onChange={handleSearchChange} className="searchBar" value={buffer} />
             {searchIcon}
           </div>
         </div>
 
-        <div className="animes">
           {animes.length > 0 ? (
           animes.map((anime, i) => (
             <Anime
