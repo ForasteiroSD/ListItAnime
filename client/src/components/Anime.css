@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
+    width: 210px;
     text-align: center;
 }
 
 .images {
-    width: 200px;
+    width: 210px;
     height: 300px;
     object-fit: cover;
 }
