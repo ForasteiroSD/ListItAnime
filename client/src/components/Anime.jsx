@@ -9,12 +9,8 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen }) {
 
   const getAnime = async (id) => {
     if (!modalOpen) {
-      try {
-        const response = await Axios.get("http://127.0.0.1:5000/anime?id=" + id);
-        setAnime(response.data);
-      } catch (error) {
-        console.log('Too many requests');
-      }
+      const response = await Axios.get("http://127.0.0.1:5000/anime?id=" + id);
+      setAnime(response.data);
       setModalOpen(true);
       setShow(!show);
     }
@@ -29,8 +25,10 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen }) {
           setModalOpen={setModalOpen}
         />
       ) : null}
-      <div onClick={() => getAnime(mal_id)} className="anime">
-        <img className="images" src={image} alt={title + " image"} />
+      <div className="anime">
+        <figure onClick={() => getAnime(mal_id)}>
+          <img src={image} alt={title + " image"} />
+        </figure>
         <p className="text">{title}</p>
       </div>
     </>

@@ -15,19 +15,17 @@ app.get("/search", async(req, res) => {
 
     try {
         const response = await Axios.get('https://api.jikan.moe/v4/anime?q=' + name);
-        const dados = response.data.data;
+        let dados = response.data.data;
         let answer = [];
-        dados.forEach(anime => {
-            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url })
-        });
+        dados.sort((a, b) => b.score - a.score).forEach(anime => !anime.genres.some((genre) => genre.mal_id === 12) && answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url }));
         res.send(answer);
     } catch (error) {
-        // console.log(error);
         res.send([]);
     }
 });
 
 app.get("/animes", async(req, res) => {
+
     try {
         let response = await Axios.get('https://api.jikan.moe/v4/seasons/now');
         let dados = response.data.data;

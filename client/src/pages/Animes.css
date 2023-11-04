@@ -31,6 +31,7 @@
 }
 
 .boxSearchBar {
+    width: 18rem;
     display: flex;
     align-items: center;
     padding: 6px;
@@ -40,6 +41,7 @@
 }
 
 .searchBar {
+    width: 100%;
     background-color: var(--background-nav);
     border: 0;
     outline: none;
