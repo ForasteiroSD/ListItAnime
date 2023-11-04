@@ -1,0 +1,112 @@
+.login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: var(--background);
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 1 0%;
+}
+
+.login .logo {
+    width: 50vw;
+    height: 40vh;
+    min-width: 50rem;
+    min-height: 20rem;
+    background-image: var(--image);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.login form {
+    background-color: var(--background-nav);
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login form .login-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 30rem;
+    width: 100%;
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+.login form .login-data h1{
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.login form .login-data .inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login .login-data input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-left: -0.2rem;
+    background-color: var(--background-nav);
+    border: 1px solid var(--border-nav);
+    border-radius: 10px;
+    outline: none;
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+.login .login-data .buttons {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.login .login-data .buttons button {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.8rem;
+    color: white;
+    border: 1px solid var(--border-nav);
+    border-radius: 10px;
+    background-color: var(--highlight);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.login .login-data .create {
+    margin-top: -10px;
+    text-align: center;
+}
+
+.login .login-data span {
+    color: var(--highlight);
+    cursor: pointer;
+}
+
+@media (max-width: 1480px) {
+    .login {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login .logo {
+        margin-top: 2rem;
+        min-width: 30rem;
+        min-height: 10rem;
+    }
+
+    .login form {
+        width: 100vw;
+        height: auto;
+    }
+}

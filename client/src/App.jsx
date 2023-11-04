@@ -21,6 +21,7 @@ import "./App.css";
 
 //Util
 import { toggleMode } from "./utils/toggleMode";
+import Login from "./pages/Login";
 
 function App() {
   const [themeIcon, setThemeIcon] = useState()
@@ -48,6 +49,7 @@ function App() {
           <Route path="/listit" element={<ListIt />} />
           <Route path="/towatch" element={<ToWatch />} />
           <Route path="/watched" element={<Watched />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
