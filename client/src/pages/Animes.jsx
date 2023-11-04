@@ -19,12 +19,23 @@ function Animes() {
   const [searchIcon, setSearchIcon] = useState(<Ai.AiOutlineSearch className="searchIcon"/>);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const getRecomendations = async () => {
-    const response = await Axios.get('http://127.0.0.1:5000/animes');
-    const animes = response.data;
+  function PromiseTimeout(delayms) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(resolve, delayms);
+    });
+  }
+
+  async function getRecomendations() {
     setAnimeName('THIS SEASON ANIME...');
+    const response = await Axios.get('http://127.0.0.1:5000/animes');
+    let animes = response.data;
     setAnimes(animes);
   }
+
+  useEffect(() => {
+      console.log(animes)
+  }, [animes])
+
 
   const handleSearchChange = (e) => {
     const search = e.target.value;
@@ -59,7 +70,7 @@ function Animes() {
     return (
       <>
         <div className="animeBar">
-          <h2 className="animeName">{animeName}</h2>
+          <h2 className="animeName" onClick={getRecomendations}>{animeName}</h2>
           <div className="boxSearchBar">
             <input type="text" onChange={handleSearchChange} className="searchBar" value={buffer} />
             {searchIcon}
@@ -68,9 +79,9 @@ function Animes() {
 
         <div className="animes">
           {animes.length > 0 ? (
-          animes.map((anime) => (
+          animes.map((anime, i) => (
             <Anime
-              key={anime.mal_id}
+              key={i}
               mal_id={anime.mal_id}
               title={anime.title}
               image={anime.image}
