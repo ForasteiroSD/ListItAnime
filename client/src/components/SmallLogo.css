@@ -1,0 +1,10 @@
+.logoFigure {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoImg {
+    width: 15rem;
+}

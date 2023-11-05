@@ -6,6 +6,12 @@
     --text: #272D37;
     --background-nav: rgb(241, 241, 241);
     --highlight: #574EFA;
+    --image: 'url(./src/assets/White-Mode-Alto.png)';
+    --skeleton: rgb(54, 54, 54);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 
