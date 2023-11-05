@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 //Packages
 import Axios from "axios";
 import * as Ai from "react-icons/ai";
+import Cookies from 'js-cookie';
 
 //Components
 import Anime from "../components/Anime";
@@ -80,7 +81,8 @@ function Animes() {
     setSearchTimeout(timeout);
   }, [buffer]);
 
-  return (
+  if(!Cookies.get('id')) window.location.href = "/login";
+  else return (
     <>
       <div className="animeBar">
         <h2 className="animeName">{animeName}</h2>

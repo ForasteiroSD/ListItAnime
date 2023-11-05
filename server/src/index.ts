@@ -7,6 +7,7 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors());
+app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
 app.listen(5000, "0.0.0.0", () => {
@@ -66,7 +67,7 @@ app.post("/sign", async(req: Request, res: Response) => {
     const {email, password, nickname, confirmPass} = req.body;
 
     //Create account
-    if(!nickname) {
+    if(nickname) {
         const user = await prisma.user.create({
             data: {
                 email: email,

@@ -1,17 +1,33 @@
 import "./Login.css";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Axios from 'axios';
+import Cookies from 'js-cookie';
 
 function Login() {
   const emailSchema = z.string().email();
   const form = document.querySelector("form");
   const inputEmail = document.querySelector("#email");
   const inputPassword = document.querySelector("#password");
+  const inputNickname = document.querySelector("#nickname");
   const [emailValid, setEmailValid] = useState(true);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
   const [singUp, setSingUp] = useState(false);
   const [confirm, setConfirm] = useState(true);
   const [confirmData, setConfirmData] = useState();
+
+  async function Sign(type) {
+    if(type === 'In') {
+      const response = ( await Axios.post('http://127.0.0.1:5000/sign', {email: inputEmail.value, password: inputPassword.value})).data;
+      if(response === 'Invalid Data') alert("Invalid data");
+      else {
+        Cookies.set('id', response.id, {expires: 30});
+        window.location.href = "/";
+      };
+    } else {
+
+    }
+  }
 
   function validate(e) {
     e.preventDefault();
@@ -23,7 +39,7 @@ function Login() {
         setPasswordInvalid(true);
       } else {
         if (confirmData === undefined) {
-          form.submit();
+          Sign('In');
         } else {
           inputPassword.value !== confirmData
             ? setConfirm(false)
@@ -35,10 +51,12 @@ function Login() {
     }
   }
 
+  if(Cookies.get('id')) window.location.href = "/"
+  else
   return (
     <div className="login">
       <div className="logo" />
-      <form onSubmit={validate} method="post" action="http://127.0.0.1:5000/sign">
+      <form onSubmit={validate}>
         {!singUp ? (
           <div className="login-data">
             <div>

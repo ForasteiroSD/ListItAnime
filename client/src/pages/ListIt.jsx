@@ -1,5 +1,8 @@
+import Cookies from 'js-cookie';
+
 function ListIt() {
-  return <div>ListIt</div>;
+  if(!Cookies.get('id')) window.location.href = "/login";
+  else return <div>ListIt</div>;
 }
 
 export default ListIt;

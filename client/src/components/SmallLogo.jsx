@@ -4,7 +4,7 @@ import { useState } from "react"
 //css
 import './SmallLogo.css'
 
-let logo = "./src/assets/Dark-Mode-Baixo.png";
+let logo = "./src/assets/White-Mode-Baixo.png";
 
 export function changeLogoTheme() {
     if(logo === "./src/assets/Dark-Mode-Baixo.png") logo = "./src/assets/White-Mode-Baixo.png";

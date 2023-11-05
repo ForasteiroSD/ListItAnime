@@ -1,5 +1,6 @@
 export function toggleMode() {
     const root = document.querySelector(':root');
+    console.log(root.style.getPropertyValue('--background'));
     if (root.style.getPropertyValue('--background') === '#121214') {
         root.style.setProperty('--background', '#e9e9e9');
         root.style.setProperty('--white', 'white');
