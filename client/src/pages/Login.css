@@ -46,28 +46,27 @@
     min-height: 43rem;
 }
 
-.login form .login-data h1{
+.login form .login-data h1 {
     font-size: 2.5rem;
     margin-bottom: 0;
 }
 
-.login form .login-data .inputs{
+.login form .login-data .inputs {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.login form .signUp .inputs{
+.login form .signUp .inputs {
     gap: 7px;
 }
 
-.login form .login-data .inputs .alert{
+.login form .login-data .inputs .alert {
     margin-top: 10px;
     color: #B02817;
 }
 
-
-.login form .login-data .inputs .password{
+.login form .login-data .inputs .password {
     margin-top: 0px;
     color: #B02817;
 }
@@ -114,16 +113,14 @@
 @media (max-width: 1480px) {
     .login {
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
     }
-
     .login .logo {
-        margin-top: 2rem;
+        margin: auto 0;
         min-width: 30rem;
         min-height: 10rem;
     }
-
     .login form {
         width: 100vw;
         height: auto;
