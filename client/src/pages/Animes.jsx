@@ -95,7 +95,7 @@ function Animes() {
           <h2>Sorry, we could not find this anime.</h2>
         )}
       </div>
-    ) : <div className="animes">{Array.from({length: 30}).map((item, i) => <Skeleton key={i}/>)}</div>
+    ) : <div className="animes">{Array.from({length: 28}).map((item, i) => <Skeleton key={i}/>)}</div>
     }
   </>
   );
