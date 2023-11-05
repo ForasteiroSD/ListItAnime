@@ -1,7 +1,5 @@
 function ToWatch() {
-  return (
-    <div>ToWatch</div>
-  )
+  return <div>ToWatch</div>;
 }
 
-export default ToWatch
+export default ToWatch;

@@ -1,7 +1,5 @@
 function Watched() {
-  return (
-    <div>Watched</div>
-  )
+  return <div>Watched</div>;
 }
 
-export default Watched
+export default Watched;

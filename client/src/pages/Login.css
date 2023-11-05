@@ -81,6 +81,7 @@
     outline: none;
     color: var(--text);
     font-size: 1.05rem;
+    box-sizing: border-box;
 }
 
 .login .login-data .buttons {

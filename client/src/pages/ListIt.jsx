@@ -1,7 +1,5 @@
 function ListIt() {
-  return (
-    <div>ListIt</div>
-  )
+  return <div>ListIt</div>;
 }
 
-export default ListIt
+export default ListIt;

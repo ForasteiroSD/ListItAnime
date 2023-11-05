@@ -38,11 +38,11 @@ function Login() {
   return (
     <div className="login">
       <div className="logo" />
-      <form onSubmit={validate}>
+      <form onSubmit={validate} method="post" action="http://127.0.0.1:5000/sign">
         {!singUp ? (
           <div className="login-data">
             <div>
-              <h1>Log in</h1>
+              <h1>Log In</h1>
               <p>Welcome! Please enter your details</p>
             </div>
             <div className="inputs">

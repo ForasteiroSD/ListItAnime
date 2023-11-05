@@ -46,12 +46,12 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Animes />} />
           <Route path="/topanimes" element={<TopAnimes />} />
           <Route path="/listit" element={<ListIt />} />
           <Route path="/towatch" element={<ToWatch />} />
           <Route path="/watched" element={<Watched />} />
-          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
