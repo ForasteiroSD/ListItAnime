@@ -2,6 +2,7 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
+import {changeLogoTheme} from "./components/SmallLogo";
 
 //Pages
 import Animes from "./pages/Animes";
@@ -30,6 +31,7 @@ function App() {
     const newMode = toggleMode();
     if(newMode === 'dark') setThemeIcon(<BsFillBrightnessHighFill />);
     else setThemeIcon(<MdDarkMode />);
+    changeLogoTheme();
   }
 
   useEffect(() => {

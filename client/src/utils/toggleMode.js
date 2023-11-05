@@ -7,6 +7,7 @@ export function toggleMode() {
         root.style.setProperty('--text', '#272D37');
         root.style.setProperty('--background-nav', 'rgb(241, 241, 241)');
         root.style.setProperty('--highlight', '#574EFA');
+        root.style.setProperty('--skeleton', 'rgb(154, 154, 154)');
         root.style.setProperty('--image', 'url(./src/assets/Dark-Mode-Alto.png)');
         return 'white';
     } else {
@@ -16,6 +17,7 @@ export function toggleMode() {
         root.style.setProperty('--text', 'white');
         root.style.setProperty('--background-nav', '#202024');
         root.style.setProperty('--highlight', '#4e84fa');
+        root.style.setProperty('--skeleton', 'rgb(54, 54, 54)');
         root.style.setProperty('--image', 'url(./src/assets/White-Mode-Alto.png)');
         return 'dark';
     }

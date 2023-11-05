@@ -2,6 +2,7 @@ import React from "react";
 import "./NavBar.css";
 import { useLocation } from "react-router-dom";
 import NavItem from "./NavItem";
+import SmallLogo from "./SmallLogo";
 
 function NavBar() {
   let { pathname } = useLocation();
@@ -28,15 +29,18 @@ function NavBar() {
     },
   ];
   return (
-    <nav className="menu">
-      <ul>
-        {NavBarData.map((item) => {
-          return (
-            <NavItem {...item} key={item.path} isSelected={item.path === pathname}/>
-          );
-        })}
-      </ul>
-    </nav>
+    <>
+      <SmallLogo />
+      <nav className="menu">
+        <ul>
+          {NavBarData.map((item) => {
+            return (
+              <NavItem {...item} key={item.path} isSelected={item.path === pathname}/>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
   );
 }
 

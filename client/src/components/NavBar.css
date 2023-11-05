@@ -1,6 +1,5 @@
 .menu {
     position: relative;
-    top: 1.5em;
     margin: 0 auto;
     width: 70%;
     border: 2px solid var(--border-nav);

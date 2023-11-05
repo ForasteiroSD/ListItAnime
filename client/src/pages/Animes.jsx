@@ -11,30 +11,33 @@ import "./Animes.css";
 //Css
 import './Animes.css';
 
+function Skeleton() {
+  return (
+    <div className="skeletonElement">
+      <div className="skeleton" />
+      <p className="textSkeleton">Q de Quijo</p>
+    </div>
+  )
+}
+
 function Animes() {
   const [animes, setAnimes] = useState();
   const [buffer, setBuffer] = useState('');
   const [searchTimeout, setSearchTimeout] = useState(null);
-  const [animeName, setAnimeName] = useState('');
+  const [animeName, setAnimeName] = useState('THIS SEASON ANIME...');
   const [searchIcon, setSearchIcon] = useState(<Ai.AiOutlineSearch className="searchIcon"/>);
   const [modalOpen, setModalOpen] = useState(false);
 
-  function PromiseTimeout(delayms) {
-    return new Promise(function (resolve, reject) {
-        setTimeout(resolve, delayms);
-    });
-  }
-
   async function getRecomendations() {
-    setAnimeName('THIS SEASON ANIME...');
     const response = await Axios.get('http://127.0.0.1:5000/animes');
     let animes = response.data;
+    setAnimeName('THIS SEASON ANIME...');
     setAnimes(animes);
   }
 
-  useEffect(() => {
-      console.log(animes)
-  }, [animes])
+  // useEffect(() => {
+  //     console.log(animes)
+  // }, [animes])
 
 
   const handleSearchChange = (e) => {
@@ -66,35 +69,36 @@ function Animes() {
     setSearchTimeout(timeout);
   }, [buffer])
   
-  if(animes) {
-    return (
-      <>
+  return (
+  <>
+    <div className="animeBar">
+      <h2 className="animeName">{animeName}</h2>
+      <div className="boxSearchBar">
+        <input type="text" onChange={handleSearchChange} className="searchBar" value={buffer} />
+        {searchIcon}
+      </div>
+    </div>
+    
+    {animes ? (
       <div className="animes">
-        <div className="animeBar">
-          <h2 className="animeName">{animeName}</h2>
-          <div className="boxSearchBar">
-            <input type="text" onChange={handleSearchChange} className="searchBar" value={buffer} />
-            {searchIcon}
-          </div>
-        </div>
-
-          {animes.length > 0 ? (
-          animes.map((anime, i) => (
-            <Anime
-              key={i}
-              mal_id={anime.mal_id}
-              title={anime.title}
-              image={anime.image}
-              modalOpen={modalOpen}
-              setModalOpen={setModalOpen}
-            />
-          ))) : (
-            <h2>Sorry, we could not find this anime.</h2>
-          )}
-        </div>
-      </>
-    );
-  }
+        {animes.length > 0 ? (
+        animes.map((anime, i) => (
+          <Anime
+            key={i}
+            mal_id={anime.mal_id}
+            title={anime.title}
+            image={anime.image}
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+          />
+        ))) : (
+          <h2>Sorry, we could not find this anime.</h2>
+        )}
+      </div>
+    ) : <div className="animes">{Array.from({length: 30}).map((item, i) => <Skeleton key={i}/>)}</div>
+    }
+  </>
+  );
 }
 
 export default Animes;
