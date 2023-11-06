@@ -76,7 +76,7 @@ app.post("/sign", async(req: Request, res: Response) => {
                     nickname: nickname
                 }
             });
-            res.send(user);
+            res.send(user.id);
         } catch (error) {
             res.send('Email already in use');
         }
@@ -90,7 +90,7 @@ app.post("/sign", async(req: Request, res: Response) => {
                 }
             }
         });
-        if(user) res.send(user);
+        if(user) res.send(user.id);
         else res.send('Invalid Data');
     }
 });

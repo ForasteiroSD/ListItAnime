@@ -31,7 +31,7 @@ function Login() {
     if (response === "Invalid Data") setInvaliData(true);
     else if (response === "Email already in use") setEmailInUse(true);
     else {
-      Cookies.set("id", response.id, { expires: 30 });
+      Cookies.set("id", response, { expires: 30 });
       window.location.href = "/";
     }
   }
