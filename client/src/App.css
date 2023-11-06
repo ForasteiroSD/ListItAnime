@@ -45,10 +45,9 @@ body {
 .toggleMode {
     position: absolute;
     top: 1rem;
-    right: 1rem;
+    left: 1rem;
     width: 2.5rem;
     height: 2.5rem;
-    background-color: var(--background);
     border: 0;
     cursor: pointer;
     z-index: 2;
@@ -60,4 +59,23 @@ body {
     height: 1.5rem;
     margin-top: 1px;
     fill: var(--text);
+}
+
+.Logout {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    cursor: pointer;
+    z-index: 2;
+    background: none;
+}
+
+.logoutIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 1px;
+    color: var(--text);
 }

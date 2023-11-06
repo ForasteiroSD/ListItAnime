@@ -16,6 +16,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {useState, useEffect} from 'react'
 import {MdDarkMode} from 'react-icons/md';
 import {BsFillBrightnessHighFill} from 'react-icons/bs';
+import {TbLogout} from 'react-icons/tb';
+import Cookies from 'js-cookie';
 
 //Css
 import "./App.css";
@@ -24,23 +26,50 @@ import "./App.css";
 import { toggleMode } from "./utils/toggleMode";
 import Login from "./pages/Login";
 
+function LogoutButton() {
+  const removeCookie = () => {
+    Cookies.remove('id');
+    window.location.href = "/login"
+  }
+
+  return (
+    <button className="Logout" onClick={removeCookie} title="Logout">
+      <TbLogout className="logoutIcon" />
+    </button>
+  )
+}
+
 function App() {
   const [themeIcon, setThemeIcon] = useState(<BsFillBrightnessHighFill />)
 
   const changeIcon = () => {
     const newMode = toggleMode();
-    if(newMode === 'dark') setThemeIcon(<BsFillBrightnessHighFill />);
-    else setThemeIcon(<MdDarkMode />);
+    if(newMode === 'dark') {
+      setThemeIcon(<BsFillBrightnessHighFill />);
+      Cookies.set('mode', 'dark', {expires: 365});
+    } else {
+      setThemeIcon(<MdDarkMode />);
+      Cookies.set('mode', 'white', {expires: 365});
+    }
     changeLogoTheme();
   }
 
+  useEffect(() => {
+    toggleMode();
+    const mode = Cookies.get('mode');
+    if(mode) {
+      if(mode === 'white') changeIcon();
+    } else Cookies.set('mode', 'dark', {expires: 365});
+  }, [])
+
   return (
     <>
-      <button className="toggleMode" onClick={changeIcon}>
+      <button className="toggleMode" onClick={changeIcon} title="Change mode">
         {themeIcon}
       </button>
+      {Cookies.get('id') ? <LogoutButton /> : null}
       <Router>
-        <NavBar />
+        {Cookies.get('id') ? <NavBar /> : null}
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Animes />} />
