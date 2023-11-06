@@ -16,7 +16,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {useState, useEffect} from 'react'
 import {MdDarkMode} from 'react-icons/md';
 import {BsFillBrightnessHighFill} from 'react-icons/bs';
-import Cookies from 'js-cookie';
 
 //Css
 import "./App.css";
@@ -26,7 +25,7 @@ import { toggleMode } from "./utils/toggleMode";
 import Login from "./pages/Login";
 
 function App() {
-  const [themeIcon, setThemeIcon] = useState(<MdDarkMode />)
+  const [themeIcon, setThemeIcon] = useState(<BsFillBrightnessHighFill />)
 
   const changeIcon = () => {
     const newMode = toggleMode();
@@ -34,10 +33,6 @@ function App() {
     else setThemeIcon(<MdDarkMode />);
     changeLogoTheme();
   }
-
-  useEffect(() => {
-    toggleMode();
-  }, [])
 
   return (
     <>

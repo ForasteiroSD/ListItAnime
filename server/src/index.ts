@@ -64,18 +64,22 @@ app.get("/anime", async(req: Request, res: Response) => {
 });
 
 app.post("/sign", async(req: Request, res: Response) => {
-    const {email, password, nickname, confirmPass} = req.body;
+    const {email, password, nickname} = req.body;
 
     //Create account
     if(nickname) {
-        const user = await prisma.user.create({
-            data: {
-                email: email,
-                password: password,
-                nickname: nickname
-            }
-        });
-        res.send(user);
+        try {
+            const user = await prisma.user.create({
+                data: {
+                    email: email,
+                    password: password,
+                    nickname: nickname
+                }
+            });
+            res.send(user);
+        } catch (error) {
+            res.send('Email already in use');
+        }
     } else {
         //Sign In
         const user = await prisma.user.findFirst({

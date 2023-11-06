@@ -7,7 +7,7 @@
     --background-nav: #202024;
     --highlight: #4e84fa;
     --skeleton: rgb(54, 54, 54);
-    --image: 'url(./src/assets/White-Mode-Alto.png)';
+    --image: url(./src/assets/White-Mode-Alto.png);
 }
 
 
