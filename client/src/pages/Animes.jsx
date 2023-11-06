@@ -38,10 +38,6 @@ function Animes() {
     setAnimes(animes);
   }
 
-  // useEffect(() => {
-  //     console.log(animes)
-  // }, [animes])
-
   const handleSearchChange = (e) => {
     const search = e.target.value;
     setBuffer(search);

@@ -6,7 +6,9 @@ import Cookies from "js-cookie";
 
 function Login() {
   const emailSchema = z.string().email();
+  const [invalidData, setInvaliData] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
+  const [emailInUse, setEmailInUse] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
   const [singUp, setSingUp] = useState(false);
   const [confirm, setConfirm] = useState(true);
@@ -26,8 +28,8 @@ function Login() {
         nickname: nickname,
       })
     ).data;
-    if (response === "Invalid Data") alert("Invalid data");
-    else if (response === "Email already in use") alert("Email already in use");
+    if (response === "Invalid Data") setInvaliData(true);
+    else if (response === "Email already in use") setEmailInUse(true);
     else {
       Cookies.set("id", response.id, { expires: 30 });
       window.location.href = "/";
@@ -68,6 +70,7 @@ function Login() {
                 <h1>Log In</h1>
                 <p>Welcome! Please enter your details</p>
               </div>
+              {invalidData && <p className="wrong">Wrong Email or Password</p>}
               <div className="inputs">
                 <label htmlFor="email">Email</label>
                 <div>
@@ -78,6 +81,7 @@ function Login() {
                     placeholder="Enter your email"
                     onChange={() => {
                       setEmailValid(true);
+                      setInvaliData(false);
                     }}
                     required
                   />
@@ -91,7 +95,10 @@ function Login() {
                   id="password"
                   name="password"
                   placeholder="•••••••••••"
-                  onChange={() => setPasswordInvalid(false)}
+                  onChange={() => {
+                    setPasswordInvalid(false);
+                    setInvaliData(false);
+                  }}
                   required
                 />
                 {passwordInvalid && (
@@ -107,6 +114,8 @@ function Login() {
                 Don't have an account?{" "}
                 <span
                   onClick={() => {
+                    document.querySelector("#email").value = '';
+                    document.querySelector("#password").value = '';
                     setSingUp(true);
                     setEmailValid(true);
                     setPasswordInvalid(false);
@@ -132,10 +141,14 @@ function Login() {
                     placeholder="Enter your email"
                     onChange={() => {
                       setEmailValid(true);
+                      setEmailInUse(false);
                     }}
                     required
                   />
                   {!emailValid && <p className="alert">Email is not valid</p>}
+                  {emailInUse && (
+                    <p className="alert">This email is already use</p>
+                  )}
                 </div>
               </div>
               <div className="inputs">
@@ -145,7 +158,7 @@ function Login() {
                     type="text"
                     id="nickname"
                     name="nickname"
-                    placeholder="Enter the nick name you want use"
+                    placeholder="Enter the nickname you want use"
                     required
                   />
                 </div>
@@ -192,6 +205,10 @@ function Login() {
                 Go back to{" "}
                 <span
                   onClick={() => {
+                    document.querySelector("#email").value = '';
+                    document.querySelector("#nickname").value = '';
+                    document.querySelector("#password").value = '';
+                    document.querySelector("#confirmPass").value = '';
                     setSingUp(false);
                     setConfirmData(undefined);
                     setEmailValid(true);
