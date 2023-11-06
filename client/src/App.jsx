@@ -55,7 +55,6 @@ function App() {
   }
 
   useEffect(() => {
-    toggleMode();
     const mode = Cookies.get('mode');
     if(mode) {
       if(mode === 'white') changeIcon();
