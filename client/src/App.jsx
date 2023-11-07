@@ -18,6 +18,7 @@ import {MdDarkMode} from 'react-icons/md';
 import {BsFillBrightnessHighFill} from 'react-icons/bs';
 import {TbLogout} from 'react-icons/tb';
 import Cookies from 'js-cookie';
+import Axios from 'axios';
 
 //Css
 import "./App.css";
@@ -40,7 +41,8 @@ function LogoutButton() {
 }
 
 function App() {
-  const [themeIcon, setThemeIcon] = useState(<BsFillBrightnessHighFill />)
+  const [themeIcon, setThemeIcon] = useState(<BsFillBrightnessHighFill />);
+  const [nickname, setNickname] = useState();
 
   const changeIcon = () => {
     const newMode = toggleMode();
@@ -54,12 +56,21 @@ function App() {
     changeLogoTheme();
   }
 
+  const getNickname = async () => {
+    const response = (await Axios.get('http://127.0.0.1:5000/get/nickname?id=' + Cookies.get('id'))).data
+    if(response != 'Database off, sorry') setNickname(response);
+  }
+
   useEffect(() => {
+    //Change mode acording to use preference
     const mode = Cookies.get('mode');
     if(mode) {
       if(mode === 'white') changeIcon();
     } else Cookies.set('mode', 'dark', {expires: 365});
-  }, [])
+
+    //Get nickname
+    getNickname();
+  }, []);
 
   return (
     <>
