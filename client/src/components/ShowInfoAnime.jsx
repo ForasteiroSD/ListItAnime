@@ -8,19 +8,31 @@ import { useState } from "react";
 
 function ShowInfoAnime({ anime, setShow, setModalOpen }) {
   document.body.style.overflowY = "hidden";
-  const [infoInsert, setInforInsert] = useState();
+  const [infoInsert, setInfoInsert] = useState();
+  const [watched, setWatched] = useState(false);
+  const [toWatch, setToWatch] = useState(false);
+  let timer;
 
   async function insertAnime(list) {
-    const response = (
-      await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
-        params: { userId: Cookies.get("id"), list: list, anime: anime },
-      })
-    ).data;
-    if (response === "Anime inserted successfully") {
-      setInforInsert("ok");
+    if (list === "To Watch" && toWatch) {
+      setInfoInsert("error");
+    } else if (list === "Watched" && watched) {
+      setInfoInsert("error");
     } else {
-      setInforInsert("error");
+      const response = (
+        await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
+          params: { userId: Cookies.get("id"), list: list, anime: anime },
+        })
+      ).data;
+      if (response === "Anime inserted successfully") {
+        setInfoInsert("ok");
+        list === 'To Watch' ? setToWatch(true) : setWatched(true);
+      } else setInfoInsert("error");
     }
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      setInfoInsert(undefined);
+    }, 5050);
   }
 
   function closeModal() {
@@ -58,7 +70,6 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
                 </a>
               </p>
             </div>
-
             <div className="bottom-info">
               <p className="score">
                 MAL Score:
@@ -82,18 +93,19 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
                 >
                   &#x2b; Watched
                 </button>
+                {infoInsert &&
+                  (infoInsert === "ok" ? (
+                    <p className="alert inserted">
+                      Anime inserted successfully
+                    </p>
+                  ) : (
+                    <p className="alert not-inserted">
+                      Anime already registered in list
+                    </p>
+                  ))}
               </div>
-              {infoInsert &&
-                (infoInsert === "ok" ? (
-                  <p className="alert inserted">Anime inserted successfully</p>
-                ) : (
-                  <p className="alert not-inserted">
-                    Anime already registered in list
-                  </p>
-                ))}
               {/* bottom info */}
             </div>
-
             {/* data */}
           </div>
 

@@ -144,18 +144,19 @@
     }
 }
 
-.showinfoanime .bottom-info .alert {
+.showinfoanime .alert {
     position: absolute;
+    text-align: center;
     bottom: 5px;
     margin: 0;
     animation: infoDesapear 1s 4s forwards;
 }
 
-.showinfoanime .bottom-info .inserted {
+.showinfoanime .inserted {
     color: green;
 }
 
-.showinfoanime .bottom-info .not-inserted {
+.showinfoanime .not-inserted {
     color: #B02817;
 }
 
