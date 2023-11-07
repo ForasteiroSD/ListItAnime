@@ -147,7 +147,7 @@ function Login() {
                   />
                   {!emailValid && <p className="alert">Email is not valid</p>}
                   {emailInUse && (
-                    <p className="alert">This email is already use</p>
+                    <p className="alert">This email has already been used</p>
                   )}
                 </div>
               </div>
@@ -213,6 +213,7 @@ function Login() {
                     setConfirmData(undefined);
                     setEmailValid(true);
                     setPasswordInvalid(false);
+                    setInvaliData(false);
                   }}
                 >
                   Log In

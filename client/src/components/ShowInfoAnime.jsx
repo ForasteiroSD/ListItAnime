@@ -1,8 +1,27 @@
+//Styles
 import "./ShowInfoAnime.css";
-// import { useState } from "react";
+
+//Packages
+import Axios from "axios";
+import Cookies from "js-cookie";
+import { useState } from "react";
 
 function ShowInfoAnime({ anime, setShow, setModalOpen }) {
   document.body.style.overflowY = "hidden";
+  const [infoInsert, setInforInsert] = useState();
+
+  async function insertAnime(list) {
+    const response = (
+      await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
+        params: { userId: Cookies.get("id"), list: list, anime: anime },
+      })
+    ).data;
+    if (response === "Anime inserted successfully") {
+      setInforInsert("ok");
+    } else {
+      setInforInsert("error");
+    }
+  }
 
   function closeModal() {
     document.body.style.overflowY = "scroll";
@@ -49,18 +68,29 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
               <div className="adds">
                 <button
                   className="watch"
-                  onClick={() => console.log("adicionar to watch")}
+                  onClick={() => {
+                    insertAnime("To Watch");
+                  }}
                 >
                   &#x2b; To Watch
                 </button>
                 <button
                   className="watched"
-                  onClick={() => console.log("adicionar watched")}
+                  onClick={() => {
+                    insertAnime("Watched");
+                  }}
                 >
                   &#x2b; Watched
                 </button>
               </div>
-
+              {infoInsert &&
+                (infoInsert === "ok" ? (
+                  <p className="alert inserted">Anime inserted successfully</p>
+                ) : (
+                  <p className="alert not-inserted">
+                    Anime already registered in list
+                  </p>
+                ))}
               {/* bottom info */}
             </div>
 

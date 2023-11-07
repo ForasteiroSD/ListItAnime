@@ -2,6 +2,8 @@ import express from 'express'
 import { Request, Response } from 'express';
 import Axios from 'axios';
 import prisma  from "./lib/prisma";
+import { type, userInfo } from 'os';
+import { error } from 'console';
 const cors = require("cors");
 
 const app = express();
@@ -73,7 +75,20 @@ app.post("/sign", async(req: Request, res: Response) => {
                 data: {
                     email: email,
                     password: password,
-                    nickname: nickname
+                    nickname: nickname,
+                    lists: {
+                        create: [
+                            {
+                                name: 'To Watch'
+                            },
+                            {
+                                name: 'Watched'
+                            },
+                            {
+                                name: 'Top List'
+                            }
+                        ]
+                    }
                 }
             });
             res.send(user);
@@ -93,4 +108,45 @@ app.post("/sign", async(req: Request, res: Response) => {
         if(user) res.send(user);
         else res.send('Invalid Data');
     }
+});
+
+
+app.get("/insertToWatchWatched", async(req: any, res: Response) => {
+
+    const { list, anime, userId } = req.query;
+
+    try {
+        const updateList = await prisma.list.findFirst({
+            where: {
+                name: list,
+                userId: userId
+            }
+        });
+        const animes = await prisma.anime.findMany({
+            where: {
+                listId: updateList?.id
+            }
+        });
+        let bigger;
+        if(animes.length > 0) bigger = animes[animes.length-1].position_score;
+        else bigger = -1;
+        const animeInsert = await prisma.anime.create({
+            data: {
+                mal_id: Number(anime.mal_id),
+                title: anime.title,
+                image: anime.images.webp.large_image_url,
+                position_score: bigger+1,
+                list: {
+                    connect: {
+                        id: updateList?.id
+                    }
+                }
+            }
+        });
+        res.send('Anime inserted successfully');
+    } catch(error) {
+        res.send('Anime already registered in list')
+    }
+    
+    
 });
