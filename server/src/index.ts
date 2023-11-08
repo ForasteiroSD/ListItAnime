@@ -1,3 +1,4 @@
+
 import express from 'express'
 import { Request, Response } from 'express';
 import Axios from 'axios';
@@ -91,7 +92,7 @@ app.post("/sign", async(req: Request, res: Response) => {
                     }
                 }
             });
-            res.send(user.id);
+            res.send({id: user.id, nickname: user.nickname});
         } catch (error) {
             res.send('Email already in use');
         }
@@ -114,6 +115,7 @@ app.post("/sign", async(req: Request, res: Response) => {
 app.get("/insertToWatchWatched", async(req: any, res: Response) => {
 
     const { list, anime, userId } = req.query;
+    console.log({userId, list});
 
     try {
         const updateList = await prisma.list.findFirst({
@@ -122,6 +124,7 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
                 userId: userId
             }
         });
+        // console.log(updateList);
         const animes = await prisma.anime.findMany({
             where: {
                 listId: updateList?.id
@@ -145,6 +148,7 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
         });
         res.send('Anime inserted successfully');
     } catch(error) {
+        // console.log(error);
         res.send('Anime already registered in list')
     }
     
