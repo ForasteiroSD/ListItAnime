@@ -12,6 +12,8 @@ import "./Animes.css";
 //Css
 import "./Animes.css";
 
+
+
 function Skeleton() {
   return (
     <div className="skeletonElement">
@@ -21,35 +23,41 @@ function Skeleton() {
   );
 }
 
+
+
 function Animes() {
   const [animes, setAnimes] = useState();
   const [buffer, setBuffer] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [animeName, setAnimeName] = useState("THIS SEASON ANIME...");
-  const [searchIcon, setSearchIcon] = useState(
-    <Ai.AiOutlineSearch className="searchIcon" />
-  );
+  const [searchIcon, setSearchIcon] = useState(<Ai.AiOutlineSearch className="searchIcon" />);
   const [modalOpen, setModalOpen] = useState(false);
 
-  async function getRecomendations() {
-    const response = await Axios.get("http://127.0.0.1:5000/animes");
-    let animes = response.data;
+  async function getThisSeasonAnimes() {
     setAnimeName("THIS SEASON ANIME...");
-    setAnimes(animes);
+    const timeout = setTimeout(async () => {
+      const response = await Axios.get("http://127.0.0.1:5000/animes");
+      setAnimes(response.data);
+    }, 750);
+    setSearchTimeout(timeout);
+  }
+
+  async function searchAnimes() {
+    setAnimeName("SEARCHING...")
+    const timeout = setTimeout(async () => {
+      const response = await Axios.get("http://127.0.0.1:5000/search?name=" + buffer.replaceAll(" ", "+"));
+      if (buffer.length > 30) setAnimeName("RESULTS FOR: " + buffer.slice(0, 31) + "...");
+      else setAnimeName("RESULTS FOR: " + buffer);
+      setAnimes(response.data);
+    }, 750);
+    setSearchTimeout(timeout);
   }
 
   const handleSearchChange = (e) => {
     const search = e.target.value;
     setBuffer(search);
-    if (search === "")
-      setSearchIcon(<Ai.AiOutlineSearch className="searchIcon" />);
-    else
-      setSearchIcon(
-        <Ai.AiOutlineClose
-          onClick={deleteSearch}
-          className="searchIcon, closeIcon"
-        />
-      );
+    if (search === "") setSearchIcon(<Ai.AiOutlineSearch className="searchIcon" />);
+    else setSearchIcon( <Ai.AiOutlineClose onClick={deleteSearch} className="searchIcon, closeIcon" />);
   };
 
   const deleteSearch = () => {
@@ -60,21 +68,9 @@ function Animes() {
   useEffect(() => {
     clearTimeout(searchTimeout);
     setSearchTimeout(null);
-    const timeout = setTimeout(async () => {
-      if (buffer === "") {
-        getRecomendations();
-      } else {
-        const response = await Axios.get(
-          "http://127.0.0.1:5000/search?name=" + buffer.replaceAll(" ", "+")
-        );
-        const animes = response.data;
-        if (buffer.length > 30)
-          setAnimeName("RESULTS FOR: " + buffer.slice(0, 31) + "...");
-        else setAnimeName("RESULTS FOR: " + buffer);
-        setAnimes(animes);
-      }
-    }, 750);
-    setSearchTimeout(timeout);
+    setAnimes(null);
+    if (buffer === "") getThisSeasonAnimes()
+    else searchAnimes()
   }, [buffer]);
 
   if(!Cookies.get('id')) window.location.href = "/login";

@@ -91,7 +91,7 @@ app.post("/sign", async(req: Request, res: Response) => {
                     }
                 }
             });
-            res.send(user);
+            res.send(user.id);
         } catch (error) {
             res.send('Email already in use');
         }
@@ -105,7 +105,7 @@ app.post("/sign", async(req: Request, res: Response) => {
                 }
             }
         });
-        if(user) res.send(user);
+        if(user) res.send({id: user.id, nickname: user.nickname});
         else res.send('Invalid Data');
     }
 });
@@ -149,4 +149,19 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
     }
     
     
+});
+
+app.get("/get/nickname", async (req: Request, res: Response) => {
+    const {id} = req.query;
+
+    try {
+        const user = await prisma.user.findFirst({
+            where: {
+                id: String(id)
+            }
+        });
+        if(user) res.send(user.nickname);
+    } catch (error) {
+        res.send('Database off, sorry');
+    }
 });
