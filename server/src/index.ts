@@ -147,6 +147,22 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
     } catch(error) {
         res.send('Anime already registered in list')
     }
-    
-    
+});
+
+app.get("/getAnimesList", async(req: any, res: Response) => {
+
+    const { list, userId } = req.query;
+
+    const List = await prisma.list.findFirst({
+        where: {
+            name: list,
+            userId: userId
+        }
+    });
+    const animes = await prisma.anime.findMany({
+        where: {
+            listId: List?.id
+        }
+    });
+    res.send(animes);
 });
