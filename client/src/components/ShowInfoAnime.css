@@ -1,11 +1,19 @@
 @keyframes show1 {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes show2 {
-    from {transform: scale(0);}
-    to {transform: scale(1);}
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
 .showinfoanime {
@@ -14,6 +22,7 @@
     height: 100vh;
     width: 100vw;
     z-index: 10;
+    min-height: 630px;
 }
 
 .showinfoanime .back {
@@ -63,7 +72,7 @@
     margin: 0 0 0 -1px;
 }
 
-.showinfoanime .info img{
+.showinfoanime .info img {
     max-width: 440px;
     height: 100%;
     border-radius: 20px 0 0 20px;
@@ -75,10 +84,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 490px;
+    align-items: center;
+    width: 100%;
 }
 
-.showinfoanime .data .sinopse{
+.showinfoanime .data .sinopse {
     max-height: 250px;
     overflow-y: scroll;
     padding-right: 0.5rem;
@@ -136,7 +146,7 @@
         opacity: 1;
     }
     95% {
-        opacity: 0;   
+        opacity: 0;
     }
     100% {
         opacity: 0;
@@ -161,23 +171,29 @@
 }
 
 @media (max-width: 1000px) {
-
     .showinfoanime .modal {
-        top: 0;
-        transform: translate(-50%, 0%);
+        width: min(80vw, auto);
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
-
     .showinfoanime .info {
         flex-direction: column;
         align-items: center;
         padding-left: 2rem;
-        width: 90%;
+        width: min(80vw, 500px);
+        gap: 0rem;
     }
-
-    .showinfoanime .info .data {
-        min-width: none;
+    .showinfoanime .data .sinopse {
+        padding-right: 0;
+        max-height: 200px;
     }
-
+    .showinfoanime .data .trailer {
+        text-align: left;
+    }
+    .showinfoanime .data h2 {
+        margin-top: 0;
+        padding-right: 0;
+    }
     .showinfoanime .info figure {
         height: 300px;
     }
@@ -185,19 +201,16 @@
         margin-top: 1rem;
         border-radius: 0;
     }
-
     .showinfoanime .info h2 {
         text-align: center;
     }
 }
 
-@media (max-width: 1000px) and (max-height: 700px) {
-
+@media (max-width: 1000px) and (max-height: 870px) {
     .showinfoanime .modal {
         top: 50%;
         transform: translate(-50%, -50%);
     }
-
     .showinfoanime .info figure {
         display: none;
     }

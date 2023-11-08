@@ -63,7 +63,7 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
             <div>
               <h2>{anime.title}</h2>
               <p className="sinopse">{anime.synopsis}</p>
-              <p>
+              <p className="trailer">
                 Anime Trailer:{" "}
                 <a href={anime.trailer.url} target="_blank">
                   {anime.trailer.url}
