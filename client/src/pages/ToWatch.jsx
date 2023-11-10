@@ -29,7 +29,7 @@ function ToWatch() {
     ).data;
     setAnimes(response);
   }
-  
+
   useEffect(() => {
     getAnimes();
   }, [animes]);
@@ -39,18 +39,18 @@ function ToWatch() {
     return (
       <div className="to-watch">
         <div className="animeBar">
-          <h2 className="animeName">Animes To Watch</h2>
+          <h2 className="animeName">ANIMES TO WATCHh</h2>
         </div>
 
         {animes ? (
-          <div className="animes">
+          <div className="animes towatch-animes">
             {animes.length > 0 ? (
               animes.map((anime, i) => (
                 <Anime
                   key={i}
                   mal_id={anime.mal_id}
-                  title={anime.title}
                   image={anime.image}
+                  toWatch={true}
                 />
               ))
             ) : (

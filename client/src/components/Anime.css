@@ -1,4 +1,5 @@
 .anime {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,4 +27,42 @@
 
 .anime figure img:hover {
     transform: scale(1.05);
+}
+
+.anime .addWatch {
+    position: absolute;
+    background-color: rgba(19, 18, 18, 0.746);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.anime .addWatch .trash-can {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: white;
+    cursor: pointer;
+}
+
+.anime .addWatch .mark-watched {
+    font-weight: 600;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 255, 0);
+    color: white;
+    cursor: pointer;
+    border: 1px solid rgb(136, 135, 135);
+    border-radius: 15px;
+    padding: 0.5rem;
+    transition: 0.3s;
+}
+
+.anime .addWatch .mark-watched:hover {
+    transform: scale(1.04);
 }

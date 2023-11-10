@@ -2,10 +2,12 @@ import "./Anime.css";
 import ShowInfoAnime from "./ShowInfoAnime";
 import Axios from "axios";
 import { useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 
-function Anime({ mal_id, title, image, modalOpen, setModalOpen }) {
+function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
   const [anime, setAnime] = useState();
   const [show, setShow] = useState(false);
+  const [showToWatch, setShowToWatch] = useState(false);
 
   const getAnime = async (id) => {
     if (!modalOpen) {
@@ -25,12 +27,33 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen }) {
           setModalOpen={setModalOpen}
         />
       ) : null}
-      <div className="anime">
-        <figure onClick={() => getAnime(mal_id)}>
-          <img src={image} alt={title + " image"} />
-        </figure>
-        <p className="text">{title}</p>
-      </div>
+      {toWatch ? (
+        <div
+          className="anime"
+          onMouseEnter={() => setShowToWatch(true)}
+          onMouseLeave={() => setShowToWatch(false)}
+        >
+          {showToWatch && (
+            <div className="addWatch">
+              <FaTrashAlt className="trash-can" />
+              <button className="mark-watched">Mark as Watched</button>
+            </div>
+          )}
+
+          <div>
+            <figure>
+              <img src={image} alt={title + " image"} />
+            </figure>
+          </div>
+        </div>
+      ) : (
+        <div className="anime">
+          <figure onClick={() => getAnime(mal_id)}>
+            <img src={image} alt={title + " image"} />
+          </figure>
+          {title && <p className="text">{title}</p>}
+        </div>
+      )}
     </>
   );
 }
