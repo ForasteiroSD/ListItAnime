@@ -39,7 +39,7 @@ function ToWatch() {
     return (
       <div className="to-watch">
         <div className="animeBar">
-          <h2 className="animeName">ANIMES TO WATCHh</h2>
+          <h2 className="animeName">ANIMES TO WATCH</h2>
         </div>
 
         {animes ? (
@@ -54,7 +54,7 @@ function ToWatch() {
                 />
               ))
             ) : (
-              <h2>
+              <h2 className="nothing-to-watch">
                 Looks like you're not planning to watch anything, try adding
                 some new animes in the page <a href="/">Animes</a>
               </h2>

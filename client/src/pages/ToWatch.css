@@ -6,3 +6,7 @@
 .towatch-animes figure {
     cursor: auto;
 }
+
+.to-watch .nothing-to-watch {
+    text-align: center;
+}

@@ -3,11 +3,13 @@ import ShowInfoAnime from "./ShowInfoAnime";
 import Axios from "axios";
 import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
   const [anime, setAnime] = useState();
   const [show, setShow] = useState(false);
   const [showToWatch, setShowToWatch] = useState(false);
+  const [removed, setRemoved] = useState();
 
   const getAnime = async (id) => {
     if (!modalOpen) {
@@ -17,6 +19,14 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
       setShow(!show);
     }
   };
+
+  const removeAnime = async (id) => {
+    const response = (await Axios.get("http://127.0.0.1:5000/removeAnime", {
+      params: { mal_id: id, list: "To Watch", userId: Cookies.get("id")}
+    })).data;
+
+    if(response === 'Removed') setRemoved(true);
+  }
 
   return (
     <>
@@ -35,7 +45,7 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
         >
           {showToWatch && (
             <div className="addWatch">
-              <FaTrashAlt className="trash-can" />
+              <FaTrashAlt className="trash-can" onClick={() => removeAnime(mal_id)}/>
               <button className="mark-watched">Mark as Watched</button>
             </div>
           )}

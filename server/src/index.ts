@@ -1,9 +1,7 @@
 import express from 'express'
 import { Request, Response } from 'express';
 import Axios from 'axios';
-import prisma  from "./lib/prisma";
-import { type, userInfo } from 'os';
-import { error } from 'console';
+import prisma from './lib/prisma';
 const cors = require("cors");
 
 const app = express();
@@ -165,4 +163,29 @@ app.get("/getAnimesList", async(req: any, res: Response) => {
         }
     });
     res.send(animes);
+});
+
+app.get("/removeAnime", async (req: any, res: Response) => {
+    const { mal_id, list, userId } = req.query;
+
+
+    try {
+        const List = await prisma.list.findFirst({
+            where: {
+                name: list,
+                userId: userId
+            }
+        });
+    
+        const anime = await prisma.anime.deleteMany({
+            where: {
+                mal_id: Number(mal_id),
+                listId: List?.id
+            }
+        });
+    
+        res.send('Removed');
+    } catch (error) {
+        res.send('Failed to remove');
+    }
 });
