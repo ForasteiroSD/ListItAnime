@@ -2,6 +2,7 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 //Styles
 import "./ToWatch.css";
@@ -51,12 +52,13 @@ function ToWatch() {
                   mal_id={anime.mal_id}
                   image={anime.image}
                   toWatch={true}
+                  title={anime.title}
                 />
               ))
             ) : (
               <h2 className="nothing-to-watch">
                 Looks like you're not planning to watch anything, try adding
-                some new animes in the page <a href="/">Animes</a>
+                some new animes in the page <Link to='/'>Animes</Link>
               </h2>
             )}
           </div>

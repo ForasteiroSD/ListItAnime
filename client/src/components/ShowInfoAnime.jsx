@@ -5,29 +5,40 @@ import "./ShowInfoAnime.css";
 import Axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
+import GiveScore from "./GiveScore";
 
 function ShowInfoAnime({ anime, setShow, setModalOpen }) {
   document.body.style.overflowY = "hidden";
   const [infoInsert, setInfoInsert] = useState();
   const [watched, setWatched] = useState(false);
   const [toWatch, setToWatch] = useState(false);
+  const [score, setScore] = useState(false);
   let timer;
 
   async function insertAnime(list) {
-    if (list === "To Watch" && toWatch) {
+    if (list === "To Watch" && toWatch === true) {
       setInfoInsert("error");
     } else if (list === "Watched" && watched) {
       setInfoInsert("error");
     } else {
-      const response = (
-        await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
-          params: { userId: Cookies.get("id"), list: list, anime: anime },
-        })
-      ).data;
-      if (response === "Anime inserted successfully") {
-        setInfoInsert("ok");
-        list === 'To Watch' ? setToWatch(true) : setWatched(true);
-      } else setInfoInsert("error");
+      if (list === "To Watch") {
+        const response = (
+          await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
+            params: { userId: Cookies.get("id"), list: list, anime: anime },
+          })
+        ).data;
+        if (response === "Anime inserted successfully") {
+          setInfoInsert("ok");
+          setToWatch(true);
+        } else if (response === "Anime already watched") {
+          console.log("aqui");
+          setInfoInsert("watched");
+          setToWatch(true);
+          setWatched(true);
+        } else setInfoInsert("error");
+      } else {
+        setScore(true);
+      }
     }
     clearTimeout(timer);
     timer = setTimeout(() => {
@@ -87,9 +98,7 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
                 </button>
                 <button
                   className="watched"
-                  onClick={() => {
-                    insertAnime("Watched");
-                  }}
+                  onClick={() => insertAnime("Watched")}
                 >
                   &#x2b; Watched
                 </button>
@@ -97,6 +106,10 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
                   (infoInsert === "ok" ? (
                     <p className="alert inserted">
                       Anime inserted successfully
+                    </p>
+                  ) : infoInsert === "watched" ? (
+                    <p className="alert not-inserted">
+                      Can't add an anime that has already been watched
                     </p>
                   ) : (
                     <p className="alert not-inserted">
@@ -114,6 +127,15 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
 
         {/* modal */}
       </div>
+      {score && (
+        <GiveScore
+          setMarkWatched={setScore}
+          animeTitle={anime.title}
+          animeId={anime.mal_id}
+          image={anime.images.webp.large_image_url}
+          setAlreadyWatched={setWatched}
+        />
+      )}
     </div>
   );
 }

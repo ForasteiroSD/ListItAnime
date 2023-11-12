@@ -111,23 +111,58 @@ app.post("/sign", async(req: Request, res: Response) => {
 
 app.get("/insertToWatchWatched", async(req: any, res: Response) => {
 
-    const { list, anime, userId } = req.query;
+    const { list, anime, userId, score } = req.query;
 
     try {
-        const updateList = await prisma.list.findFirst({
+
+        let watchedList = await prisma.list.findFirst({
             where: {
-                name: list,
+                name: 'Watched',
                 userId: userId
             }
         });
+
+        const toWatchList = await prisma.list.findFirst({
+            where: {
+                name: 'To Watch',
+                userId: userId
+            }
+        });
+
+        let updateList;
+
+        if(list === 'To Watch') {
+            const animesWatched = await prisma.anime.findFirst({
+                where: {
+                    mal_id: Number(anime.mal_id),
+                    listId: watchedList?.id
+                }
+            });
+
+            if(animesWatched?.mal_id) {
+                return res.send('Anime already watched');
+            }
+            updateList = toWatchList;
+        } else {
+            const deleteAnimes = await prisma.anime.deleteMany({
+                where: {
+                    mal_id: Number(anime.mal_id),
+                    listId: toWatchList?.id
+                }
+            });
+            updateList = watchedList;
+        }
+        
         const animes = await prisma.anime.findMany({
             where: {
                 listId: updateList?.id
             }
         });
+
         let bigger;
         if(animes.length > 0) bigger = animes[animes.length-1].position_score;
         else bigger = -1;
+
         const animeInsert = await prisma.anime.create({
             data: {
                 mal_id: Number(anime.mal_id),
@@ -141,6 +176,30 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
                 }
             }
         });
+
+        if(score) {
+            const topList = await prisma.list.findFirst({
+                where: {
+                    name: 'Top List',
+                    userId: userId
+                }
+            });
+
+            const animeInsert = await prisma.anime.create({
+                data: {
+                    mal_id: Number(anime.mal_id),
+                    title: anime.title,
+                    image: anime.images.webp.large_image_url,
+                    position_score: Number(score),
+                    list: {
+                        connect: {
+                            id: topList?.id
+                        }
+                    }
+                }
+            });
+        }
+        
         res.send('Anime inserted successfully');
     } catch(error) {
         res.send('Anime already registered in list')

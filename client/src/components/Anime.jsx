@@ -1,15 +1,17 @@
 import "./Anime.css";
 import ShowInfoAnime from "./ShowInfoAnime";
 import Axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import Cookies from "js-cookie";
+import GiveScore from "./GiveScore";
 
 function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
   const [anime, setAnime] = useState();
   const [show, setShow] = useState(false);
   const [showToWatch, setShowToWatch] = useState(false);
   const [removed, setRemoved] = useState();
+  const [markWatched, setMarkWatched] = useState(false);
 
   const getAnime = async (id) => {
     if (!modalOpen) {
@@ -21,12 +23,14 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
   };
 
   const removeAnime = async (id) => {
-    const response = (await Axios.get("http://127.0.0.1:5000/removeAnime", {
-      params: { mal_id: id, list: "To Watch", userId: Cookies.get("id")}
-    })).data;
+    const response = (
+      await Axios.get("http://127.0.0.1:5000/removeAnime", {
+        params: { mal_id: id, list: "To Watch", userId: Cookies.get("id") },
+      })
+    ).data;
 
-    if(response === 'Removed') setRemoved(true);
-  }
+    if (response === "Removed") setRemoved(true);
+  };
 
   return (
     <>
@@ -38,24 +42,46 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
         />
       ) : null}
       {toWatch ? (
-        <div
-          className="anime"
-          onMouseEnter={() => setShowToWatch(true)}
-          onMouseLeave={() => setShowToWatch(false)}
-        >
-          {showToWatch && (
-            <div className="addWatch">
-              <FaTrashAlt className="trash-can" onClick={() => removeAnime(mal_id)}/>
-              <button className="mark-watched">Mark as Watched</button>
-            </div>
+        <>
+          {markWatched && (
+            <>
+              <GiveScore
+                setMarkWatched={setMarkWatched}
+                animeTitle={title}
+                animeId={mal_id}
+                image={image}
+                removeFromToWatch={removeAnime}
+              />
+            </>
           )}
 
-          <div>
-            <figure>
-              <img src={image} alt={title + " image"} />
-            </figure>
+          <div
+            className="anime"
+            onMouseEnter={() => setShowToWatch(true)}
+            onMouseLeave={() => setShowToWatch(false)}
+          >
+            {showToWatch && (
+              <div className="addWatch">
+                <FaTrashAlt
+                  className="trash-can"
+                  onClick={() => removeAnime(mal_id)}
+                />
+                <button
+                  className="mark-watched"
+                  onClick={() => setMarkWatched(true)}
+                >
+                  Mark as Watched
+                </button>
+              </div>
+            )}
+
+            <div>
+              <figure>
+                <img src={image} alt={title + " image"} />
+              </figure>
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         <div className="anime">
           <figure onClick={() => getAnime(mal_id)}>
