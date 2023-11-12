@@ -8,16 +8,18 @@ export function toggleMode() {
         root.style.setProperty('--background-nav', '#202024');
         root.style.setProperty('--highlight', '#4e84fa');
         root.style.setProperty('--skeleton', 'rgb(54, 54, 54)');
+        root.style.setProperty('--anime-position', 'rgb(185, 185, 185)');
         root.style.setProperty('--image', 'url(./src/assets/White-Mode-Alto.png)');
         return 'dark';
     } else {
         root.style.setProperty('--background', '#e9e9e9');
         root.style.setProperty('--white', 'white');
-        root.style.setProperty('--border-nav', 'rgb(225, 225, 225)');
+        root.style.setProperty('--border-nav', 'rgb(165, 165, 165)');
         root.style.setProperty('--text', '#272D37');
         root.style.setProperty('--background-nav', 'rgb(241, 241, 241)');
         root.style.setProperty('--highlight', '#574EFA');
         root.style.setProperty('--skeleton', 'rgb(154, 154, 154)');
+        root.style.setProperty('--anime-position', 'rgb(105, 105, 105)');
         root.style.setProperty('--image', 'url(./src/assets/Dark-Mode-Alto.png)');
         return 'white';
     }

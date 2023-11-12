@@ -169,3 +169,28 @@ app.get("/get/nickname", async (req: Request, res: Response) => {
         res.send('Database off, sorry');
     }
 });
+
+app.get("/get/topAnimes", async(req: Request, res: Response) => {
+
+    try {
+        let response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=1');
+        let dados = response.data.data;
+        let answer : any[] = [];
+        dados.forEach((anime: any) => {
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+        });
+        response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=2');
+        dados = response.data.data;
+        dados.forEach((anime: any) => {
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+        });
+        response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=3');
+        dados = response.data.data;
+        dados.forEach((anime: any) => {
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+        });
+        res.send(answer);
+    } catch (error) {
+        res.send([]);
+    }
+});
