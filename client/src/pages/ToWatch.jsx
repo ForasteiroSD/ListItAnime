@@ -58,7 +58,7 @@ function ToWatch() {
             ) : (
               <h2 className="nothing-to-watch">
                 Looks like you're not planning to watch anything, try adding
-                some new animes in the page <Link to='/'>Animes</Link>
+                some new animes in the page <span className="link"><Link to='/'>Animes</Link></span>
               </h2>
             )}
           </div>

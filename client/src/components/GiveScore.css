@@ -10,6 +10,7 @@
     min-height: 18rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     border-radius: 25px;
     padding: 1rem;
 }
@@ -34,20 +35,12 @@
 
 .giveScore .modal h2 {
     text-align: center;
+    z-index: 3;
 }
 
-.giveScore .modal .score-data {
-    position: absolute;
-    height: 100%;
-    width: calc(100% - 2rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.giveScore .modal .score-data input {
+.giveScore .modal input {
     width: 100%;
+    margin-top: 0.5rem;
     padding: 0.8rem;
     background-color: var(--background-nav);
     border: 1px solid var(--border-nav);
@@ -59,14 +52,14 @@
 }
 
 .giveScore .modal .addWatched {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
+    width: 38%;
+    margin-top: 1rem;
+    margin-left: 50%;
     transform: translateX(-50%);
     background-color: green;
     border: 1px solid black;
     border-radius: 15px;
-    padding: 0.8rem 2.5rem;
+    padding: 0.8rem 0;
     color: white;
     font-size: 1.1rem;
     cursor: pointer;
@@ -74,8 +67,9 @@
 
 .giveScore .modal .alert {
     position: absolute;
-    bottom: 0.3rem;
+    bottom: 0.2rem;
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.9rem;
+    width: 100%;
 }

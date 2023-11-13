@@ -10,3 +10,7 @@
 .to-watch .nothing-to-watch {
     text-align: center;
 }
+
+.to-watch .nothing-to-watch .link {
+    text-decoration: underline;
+}

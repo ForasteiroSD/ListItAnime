@@ -30,7 +30,6 @@ function TopAnimes() {
           {animes ? (
             animes.map((anime, i) => {
               let title, synopsis;
-              console.log(anime.synopsis);
               if (anime.title.length > 50) title = anime.title.slice(0, 51) + "...";
               else title =  anime.title;
               if(anime.synopsis) {

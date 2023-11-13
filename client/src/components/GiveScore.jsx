@@ -43,7 +43,11 @@ function GiveScore({
 
       if (response === "Anime inserted successfully") {
         if (setAlreadyWatched) setAlreadyWatched(true);
-        else removeFromToWatch(animeId);
+        else {
+          document.body.style.overflowY = "auto";
+          setMarkWatched(false);
+          removeFromToWatch(animeId);
+        }
       }
 
       setInfo(response);
@@ -76,7 +80,7 @@ function GiveScore({
           </svg>
         </button>
         <h2>{animeTitle}</h2>
-        <div className="score-data">
+        <div>
           <label htmlFor="score">
             Type the score you want to rate this anime from 0 to 10:
           </label>
@@ -96,7 +100,18 @@ function GiveScore({
         >
           Add
         </button>
-        {info && <p className="alert">{info}</p>}
+        {info && (
+          <p
+            className="alert"
+            style={
+              info === "Anime inserted successfully"
+                ? { color: "green" }
+                : { color: "#B02817" }
+            }
+          >
+            {info}
+          </p>
+        )}
       </div>
     </div>
   );

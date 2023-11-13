@@ -50,10 +50,11 @@
 }
 
 .TopAnime .animeImage {
-    width: 250px;
-    height: 150px;
+    min-width: 250px;
+    height: 200px;
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .TopAnime .position {
