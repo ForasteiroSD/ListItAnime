@@ -7,6 +7,7 @@
     --background-nav: #202024;
     --highlight: #4e84fa;
     --skeleton: rgb(54, 54, 54);
+    --anime-position: rgb(185, 185, 185);
     --image: url(./src/assets/White-Mode-Alto.png);
 }
 
@@ -41,6 +42,7 @@ body {
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     color: var(--text);
     overflow-x: hidden;
+    min-height: calc(100vh - 16px);
 }
 
 .toggleMode {

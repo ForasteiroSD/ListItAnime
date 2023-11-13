@@ -3,6 +3,7 @@ import { z } from "zod";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import Cookies from "js-cookie";
+import {sha256} from "js-sha256";
 
 function Login() {
   const emailSchema = z.string().email();
@@ -24,15 +25,16 @@ function Login() {
     const response = (
       await Axios.post("http://127.0.0.1:5000/sign", {
         email: inputEmail.value,
-        password: inputPassword.value,
+        password: sha256.hmac('lytuhiçjdswxafgqvbjanoikl', inputPassword.value),
         nickname: nickname,
       })
     ).data;
     if (response === "Invalid Data") setInvaliData(true);
     else if (response === "Email already in use") setEmailInUse(true);
     else {
+      console.log(response.id);
       Cookies.set("id", response.id, { expires: 30 });
-      window.location.href = "/";
+      // window.location.href = "/";
     }
   }
 

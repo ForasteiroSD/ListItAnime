@@ -1,3 +1,4 @@
+
 import express from 'express'
 import { Request, Response } from 'express';
 import Axios from 'axios';
@@ -89,7 +90,7 @@ app.post("/sign", async(req: Request, res: Response) => {
                     }
                 }
             });
-            res.send(user);
+            res.send({id: user.id, nickname: user.nickname});
         } catch (error) {
             res.send('Email already in use');
         }
@@ -103,7 +104,7 @@ app.post("/sign", async(req: Request, res: Response) => {
                 }
             }
         });
-        if(user) res.send(user);
+        if(user) res.send({id: user.id, nickname: user.nickname});
         else res.send('Invalid Data');
     }
 });
@@ -202,6 +203,7 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
         
         res.send('Anime inserted successfully');
     } catch(error) {
+        // console.log(error);
         res.send('Anime already registered in list')
     }
 });
@@ -246,5 +248,45 @@ app.get("/removeAnime", async (req: any, res: Response) => {
         res.send('Removed');
     } catch (error) {
         res.send('Failed to remove');
+    }
+});
+
+app.get("/get/nickname", async (req: Request, res: Response) => {
+    const {id} = req.query;
+
+    try {
+        const user = await prisma.user.findFirst({
+            where: {
+                id: String(id)
+            }
+        });
+        if(user) res.send(user.nickname);
+    } catch (error) {
+        res.send('Database off, sorry');
+    }
+});
+
+app.get("/get/topAnimes", async(req: Request, res: Response) => {
+
+    try {
+        let response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=1');
+        let dados = response.data.data;
+        let answer : any[] = [];
+        dados.forEach((anime: any) => {
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+        });
+        response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=2');
+        dados = response.data.data;
+        dados.forEach((anime: any) => {
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+        });
+        response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=3');
+        dados = response.data.data;
+        dados.forEach((anime: any) => {
+            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+        });
+        res.send(answer);
+    } catch (error) {
+        res.send([]);
     }
 });
