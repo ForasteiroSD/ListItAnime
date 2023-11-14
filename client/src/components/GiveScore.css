@@ -67,7 +67,7 @@
 
 .giveScore .modal .alert {
     position: absolute;
-    bottom: 0.2rem;
+    bottom: -0.1rem;
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.9rem;

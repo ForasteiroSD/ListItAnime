@@ -132,6 +132,7 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
           animeTitle={anime.title}
           animeId={anime.mal_id}
           image={anime.images.webp.large_image_url}
+          sinopse={anime.synopsis}
           setAlreadyWatched={setWatched}
         />
       )}

@@ -32,6 +32,7 @@ model Anime {
   mal_id Int
   title String
   image String
+  synopsis String
   list List @relation(fields: [listId], references: [id])
   listId String
   position_score Float

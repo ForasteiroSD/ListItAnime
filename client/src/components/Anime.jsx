@@ -6,7 +6,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import Cookies from "js-cookie";
 import GiveScore from "./GiveScore";
 
-function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
+function Anime({ mal_id, title, image, sinopse, modalOpen, setModalOpen, toWatch }) {
   const [anime, setAnime] = useState();
   const [show, setShow] = useState(false);
   const [showToWatch, setShowToWatch] = useState(false);
@@ -50,6 +50,7 @@ function Anime({ mal_id, title, image, modalOpen, setModalOpen, toWatch }) {
                 animeTitle={title}
                 animeId={mal_id}
                 image={image}
+                sinopse={sinopse}
                 removeFromToWatch={removeAnime}
               />
             </>

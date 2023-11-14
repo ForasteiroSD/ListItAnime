@@ -170,11 +170,12 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
                 title: anime.title,
                 image: anime.images.webp.large_image_url,
                 position_score: bigger+1,
+                synopsis: anime.synopsis,
                 list: {
                     connect: {
                         id: updateList?.id
                     }
-                }
+                },
             }
         });
 
@@ -192,6 +193,7 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
                     title: anime.title,
                     image: anime.images.webp.large_image_url,
                     position_score: Number(score),
+                    synopsis: anime.synopsis,
                     list: {
                         connect: {
                             id: topList?.id

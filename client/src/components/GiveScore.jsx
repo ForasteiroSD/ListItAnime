@@ -8,6 +8,7 @@ function GiveScore({
   animeTitle,
   animeId,
   image,
+  sinopse,
   setAlreadyWatched,
   removeFromToWatch,
 }) {
@@ -35,6 +36,7 @@ function GiveScore({
                   large_image_url: image,
                 },
               },
+              synopsis: sinopse,
             },
             score: score,
           },

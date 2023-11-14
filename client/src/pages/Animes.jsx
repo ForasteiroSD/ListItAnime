@@ -98,6 +98,7 @@ function Animes() {
                 mal_id={anime.mal_id}
                 title={anime.title}
                 image={anime.image}
+                sinopse={anime.synopsis}
                 modalOpen={modalOpen}
                 setModalOpen={setModalOpen}
               />

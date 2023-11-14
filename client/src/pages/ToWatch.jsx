@@ -51,6 +51,7 @@ function ToWatch() {
                   key={i}
                   mal_id={anime.mal_id}
                   image={anime.image}
+                  sinopse={anime.synopsis}
                   toWatch={true}
                   title={anime.title}
                 />
