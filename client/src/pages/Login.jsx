@@ -32,9 +32,7 @@ function Login() {
     if (response === "Invalid Data") setInvaliData(true);
     else if (response === "Email already in use") setEmailInUse(true);
     else {
-      console.log(response.id);
       Cookies.set("id", response.id, { expires: 30 });
-      // window.location.href = "/";
     }
   }
 

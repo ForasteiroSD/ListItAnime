@@ -1,0 +1,11 @@
+.watched .animeBar #order {
+    background-color: var(--background-nav);
+    border: 1px solid var(--border-nav);
+    border-radius: 10px;
+    padding: 0.2rem 1rem 0.2rem 0.5rem;
+    color: var(--text);
+}
+
+.watched .animeBar #order option{
+    border-radius: 10px;
+}

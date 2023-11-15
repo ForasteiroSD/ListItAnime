@@ -2,10 +2,12 @@
 import Axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 //Components
 import Anime from "../components/Anime";
+
+//Styles
+import "./Watched.css";
 
 function Skeleton() {
   return (
@@ -18,19 +20,24 @@ function Skeleton() {
 
 function Watched() {
   const [animes, setAnimes] = useState();
+  const [render, setRender] = useState();
 
   async function getAnimes() {
+    const select = document.querySelector('#order');
+    let order;
+    if(select) order = select.value;
     const response = (
       await Axios.get("http://127.0.0.1:5000/getAnimesList", {
-        params: { userId: Cookies.get("id"), list: "Watched" },
+        params: { userId: Cookies.get("id"), list: "Watched", order: order},
       })
     ).data;
     setAnimes(response);
   }
 
+
   useEffect(() => {
     getAnimes();
-  }, [animes]);
+  }, [render])
 
   if (!Cookies.get("id")) window.location.href = "/login";
   else
@@ -38,6 +45,13 @@ function Watched() {
       <div className="watched">
         <div className="animeBar">
           <h2 className="animeName">ANIMES WATCHED</h2>
+          <div>
+            <label htmlFor="order">Order By: </label>
+            <select name="order" id="order" onChange={() => setRender((state) => !state)}>
+              <option value="first">First Watched</option>
+              <option value="last">Last Watched</option>
+            </select>
+          </div>
         </div>
 
         {animes ? (
@@ -52,6 +66,7 @@ function Watched() {
                   toWatch={false}
                   title={anime.title}
                   watched={true}
+                  setRenderAgain={setRender}
                 />
               ))
             ) : (

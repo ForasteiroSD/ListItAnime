@@ -21,6 +21,7 @@ function Skeleton() {
 
 function ToWatch() {
   const [animes, setAnimes] = useState();
+  const [render, setRender] = useState();
 
   async function getAnimes() {
     const response = (
@@ -33,7 +34,7 @@ function ToWatch() {
 
   useEffect(() => {
     getAnimes();
-  }, [animes]);
+  }, [render]);
 
   if (!Cookies.get("id")) window.location.href = "/login";
   else
@@ -54,6 +55,7 @@ function ToWatch() {
                   sinopse={anime.synopsis}
                   toWatch={true}
                   title={anime.title}
+                  setRenderAgain={setRender}
                 />
               ))
             ) : (

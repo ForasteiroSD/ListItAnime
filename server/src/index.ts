@@ -205,14 +205,13 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
         
         res.send('Anime inserted successfully');
     } catch(error) {
-        // console.log(error);
         res.send('Anime already registered in list')
     }
 });
 
 app.get("/getAnimesList", async(req: any, res: Response) => {
 
-    const { list, userId } = req.query;
+    const { list, userId, order } = req.query;
 
     const List = await prisma.list.findFirst({
         where: {
@@ -225,29 +224,63 @@ app.get("/getAnimesList", async(req: any, res: Response) => {
             listId: List?.id
         }
     });
+
+    if(order === 'last') {
+        return res.send(animes.reverse());
+    }
     res.send(animes);
 });
 
 app.get("/removeAnime", async (req: any, res: Response) => {
-    const { mal_id, userId } = req.query;
+    const { mal_id, userId, listName } = req.query;
 
     try {
 
-        const userLists = await prisma.list.findMany({
-            where: {
-                userId: userId
-            }
-        });
+        if(listName === 'Watched') {
+            const watched = await prisma.list.findFirst({
+                where: {
+                    userId: userId,
+                    name: 'Watched'
+                }
+            });
 
-        for(const list of userLists) {
+            const topList = await prisma.list.findFirst({
+                where: {
+                    userId: userId,
+                    name: 'Top List'
+                }
+            });
+           
+            await prisma.anime.deleteMany({
+                where: {
+                    mal_id: Number(mal_id),
+                    listId: watched?.id
+                }
+            });
+
+            await prisma.anime.deleteMany({
+                where: {
+                    mal_id: Number(mal_id),
+                    listId: topList?.id
+                }
+            });
+            
+        } else {
+            const list = await prisma.list.findFirst({
+                where: {
+                    userId: userId,
+                    name: listName
+                }
+            });
+
             const anime = await prisma.anime.deleteMany({
                 where: {
                     mal_id: Number(mal_id),
-                    listId: list.id
+                    listId: list?.id
                 }
             });
         }
-        
+
         res.send('Removed');
     } catch (error) {
         res.send('Failed to remove');
@@ -270,7 +303,7 @@ app.get("/get/nickname", async (req: Request, res: Response) => {
 });
 
 app.get("/editScore", async (req: any, res: Response) => {
-    const { mal_id, userId, score } = req.query;
+    const { animeId, userId, score } = req.query;
 
     try {
 
@@ -283,7 +316,7 @@ app.get("/editScore", async (req: any, res: Response) => {
 
         const anime = await prisma.anime.updateMany({
             where: {
-                mal_id: mal_id,
+                mal_id: Number(animeId),
                 listId: topList?.id
             }, 
             data: {

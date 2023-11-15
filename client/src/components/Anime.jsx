@@ -20,6 +20,7 @@ function Anime({
   setModalOpen,
   toWatch,
   watched,
+  setRenderAgain,
 }) {
   const [anime, setAnime] = useState();
   const [show, setShow] = useState(false);
@@ -41,11 +42,12 @@ function Anime({
   const removeAnime = async (id, list) => {
     const response = (
       await Axios.get("http://127.0.0.1:5000/removeAnime", {
-        params: { mal_id: id, userId: Cookies.get("id") },
+        params: { mal_id: id, userId: Cookies.get("id"), listName: list },
       })
     ).data;
 
     if (response === "Removed") setRemoved(true);
+    if (setRenderAgain) setRenderAgain((state) => !state)
   };
 
   return (
@@ -67,7 +69,7 @@ function Anime({
                 animeId={mal_id}
                 image={image}
                 sinopse={sinopse}
-                removeFromToWatch={setRemoved}
+                setRenderAgain={setRenderAgain}
               />
             </>
           )}
@@ -81,7 +83,7 @@ function Anime({
               <div className="addWatch">
                 <FaTrashAlt
                   className="trash-can"
-                  onClick={() => removeAnime(mal_id)}
+                  onClick={() => removeAnime(mal_id, "To Watch")}
                 />
                 <button
                   className="mark-watched"
@@ -106,8 +108,8 @@ function Anime({
               setMarkWatched={setEditScore}
               animeTitle={title}
               animeId={mal_id}
-              removeFromToWatch={setRemoved}
               editScore={true}
+              setRenderAgain={setRenderAgain}
             />
           )}
 
@@ -121,7 +123,7 @@ function Anime({
                 <div className="addWatch">
                   <FaTrashAlt
                     className="trash-can"
-                    onClick={() => removeAnime(mal_id)}
+                    onClick={() => removeAnime(mal_id, "Watched")}
                   />
                   <button
                     className="mark-watched"

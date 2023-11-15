@@ -32,7 +32,6 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
           setInfoInsert("ok");
           setToWatch(true);
         } else if (response === "Anime already watched") {
-          console.log("aqui");
           setInfoInsert("watched");
           setToWatch(true);
           setWatched(true);
