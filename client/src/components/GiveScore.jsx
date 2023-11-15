@@ -11,6 +11,7 @@ function GiveScore({
   sinopse,
   setAlreadyWatched,
   removeFromToWatch,
+  editScore,
 }) {
   document.body.style.overflowY = "hidden";
   const [info, setInfo] = useState();
@@ -48,11 +49,39 @@ function GiveScore({
         else {
           document.body.style.overflowY = "auto";
           setMarkWatched(false);
-          removeFromToWatch(animeId);
+          removeFromToWatch(true);
         }
       }
 
       setInfo(response);
+    }
+  }
+
+  async function editAnimeScore() {
+    const score = document.querySelector("#score").value;
+
+    if (!score) {
+      setInfo("Type something in score");
+    } else if (score > 10 || score < 0) {
+      setInfo("Score should be between 0 and 10");
+    } else {
+      const response = (
+        await Axios.get("http://127.0.0.1:5000/editScore", {
+          params: {
+            userId: Cookies.get("id"),
+            animeId: animeId,
+            score: score
+          },
+        })
+      ).data;
+
+      if (response === "Score edited succesfully") {
+        document.body.style.overflowY = "auto";
+        setMarkWatched(false);
+        removeFromToWatch(true);
+      } else {
+        setInfo(response);
+      }
     }
   }
 
@@ -97,7 +126,8 @@ function GiveScore({
         <button
           className="addWatched"
           onClick={() => {
-            addToWatched();
+            if (editScore) editAnimeScore();
+            else addToWatched();
           }}
         >
           Add
@@ -106,7 +136,8 @@ function GiveScore({
           <p
             className="alert"
             style={
-              info === "Anime inserted successfully"
+              info === "Anime inserted successfully" ||
+              info === "Score edited succesfully"
                 ? { color: "green" }
                 : { color: "#B02817" }
             }

@@ -229,24 +229,25 @@ app.get("/getAnimesList", async(req: any, res: Response) => {
 });
 
 app.get("/removeAnime", async (req: any, res: Response) => {
-    const { mal_id, list, userId } = req.query;
-
+    const { mal_id, userId } = req.query;
 
     try {
-        const List = await prisma.list.findFirst({
+
+        const userLists = await prisma.list.findMany({
             where: {
-                name: list,
                 userId: userId
             }
         });
-    
-        const anime = await prisma.anime.deleteMany({
-            where: {
-                mal_id: Number(mal_id),
-                listId: List?.id
-            }
-        });
-    
+
+        for(const list of userLists) {
+            const anime = await prisma.anime.deleteMany({
+                where: {
+                    mal_id: Number(mal_id),
+                    listId: list.id
+                }
+            });
+        }
+        
         res.send('Removed');
     } catch (error) {
         res.send('Failed to remove');
@@ -265,6 +266,34 @@ app.get("/get/nickname", async (req: Request, res: Response) => {
         if(user) res.send(user.nickname);
     } catch (error) {
         res.send('Database off, sorry');
+    }
+});
+
+app.get("/editScore", async (req: any, res: Response) => {
+    const { mal_id, userId, score } = req.query;
+
+    try {
+
+        const topList = await prisma.list.findFirst({
+            where: {
+                name: 'Top List',
+                userId: userId
+            }
+        });
+
+        const anime = await prisma.anime.updateMany({
+            where: {
+                mal_id: mal_id,
+                listId: topList?.id
+            }, 
+            data: {
+                position_score: Number(score)
+            }
+        });
+        
+        res.send('Score edited succesfully');
+    } catch (error) {
+        res.send('Failed to edit');
     }
 });
 

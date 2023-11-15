@@ -66,3 +66,7 @@
 .anime .addWatch .mark-watched:hover {
     transform: scale(1.04);
 }
+
+.anime .editArea {
+    position: relative;
+}
