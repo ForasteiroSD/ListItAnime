@@ -48,7 +48,7 @@ body {
 .toggleMode {
     position: absolute;
     top: 1rem;
-    left: 1rem;
+    right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
     border: 0;
@@ -64,21 +64,101 @@ body {
     fill: var(--text);
 }
 
-.Logout {
+
+.userSettings {
     position: absolute;
     top: 1rem;
-    right: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.user {
     width: 2.5rem;
     height: 2.5rem;
     border: 0;
-    cursor: pointer;
     z-index: 2;
     background: none;
+    cursor: pointer;
+    color: var(--text);
 }
 
-.logoutIcon {
+.userIcon {
     width: 1.5rem;
     height: 1.5rem;
-    margin-top: 1px;
-    color: var(--text);
+}
+
+@keyframes showOptions {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.userSettings .userOptions {
+    position: absolute;
+    top: 2.7rem;
+    left: 1rem;
+    width: 10rem;
+    background-color: var(--background-nav);
+    border: 1px solid var(--border-nav);
+    border-radius: 0px 10px 10px;
+    z-index: 3;
+    animation: showOptions 1s;
+}
+
+.userSettings .userOptions ul{
+    padding: 0;
+    margin: 0;
+}
+
+.userSettings .userOptions ul li{
+    list-style-type: none;
+    padding: 0.3rem 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.userSettings .userOptions ul li .logoutIcon{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.userSettings .userOptions ul li:nth-of-type(1){
+    cursor: auto;
+    display: none;
+}
+
+.userSettings .userOptions ul li:nth-of-type(2){
+    /* border-top: 1px solid var(--border-nav); */
+    border-bottom: 1px solid var(--border-nav);
+}
+
+@media (max-width: 570px) {
+    .userSettings p {
+        display: none;
+    }
+
+    .userSettings .userOptions {
+        top: 2.2rem;
+        font-size: 0.7rem;
+        width: 7.5rem;
+    }
+
+    .userSettings .userOptions ul li .logoutIcon{
+        width: 0.9rem;
+        height: 0.9rem;
+    }
+
+    .userSettings .userOptions ul li:nth-of-type(1){
+        display: block;
+    }
+    
+    .userSettings .userOptions ul li:nth-of-type(2){
+        border-top: 1px solid var(--border-nav);
+    }
 }

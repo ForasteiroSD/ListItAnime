@@ -33,6 +33,7 @@ function Login() {
     else if (response === "Email already in use") setEmailInUse(true);
     else {
       Cookies.set("id", response.id, { expires: 30 });
+      window.location.href = "/";
     }
   }
 
