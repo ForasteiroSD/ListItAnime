@@ -16,16 +16,16 @@ function NavBar() {
       path: "/topanimes",
     },
     {
-      title: "List It",
-      path: "/listit",
-    },
-    {
       title: "To Watch",
       path: "/towatch",
     },
     {
       title: "Watched",
       path: "/watched",
+    },
+    {
+      title: "About",
+      path: "/about",
     },
   ];
   return (
@@ -35,7 +35,11 @@ function NavBar() {
         <ul>
           {NavBarData.map((item) => {
             return (
-              <NavItem {...item} key={item.path} isSelected={item.path === pathname}/>
+              <NavItem
+                {...item}
+                key={item.path}
+                isSelected={item.path === pathname}
+              />
             );
           })}
         </ul>

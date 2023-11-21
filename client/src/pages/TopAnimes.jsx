@@ -25,7 +25,7 @@ function TopAnimes() {
   else return (
     <>
       <section className='TopAnimes'>
-        <h2 className="text">TOP ANIMES</h2>
+        <h1 className="text">TOP ANIMES</h1>
         <div className='animes'>
           {animes ? (
             animes.map((anime, i) => {

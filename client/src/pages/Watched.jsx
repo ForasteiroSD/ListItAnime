@@ -21,33 +21,39 @@ function Skeleton() {
 function Watched() {
   const [animes, setAnimes] = useState();
   const [render, setRender] = useState();
+  const [order, setOrder] = useState();
 
   async function getAnimes() {
-    const select = document.querySelector('#order');
+    const select = document.querySelector("#order");
     let order;
-    if(select) order = select.value;
+    if (select) order = select.value;
     const response = (
       await Axios.get("http://127.0.0.1:5000/getAnimesList", {
-        params: { userId: Cookies.get("id"), list: "Watched", order: order},
+        params: { userId: Cookies.get("id"), list: "Watched", order: order },
       })
     ).data;
     setAnimes(response);
   }
 
 
+  function changeOrder() {
+    if(animes) animes.reverse();
+    setOrder(!order);
+  }
+
   useEffect(() => {
     getAnimes();
-  }, [render])
+  }, [render]);
 
   if (!Cookies.get("id")) window.location.href = "/login";
   else
     return (
       <div className="watched">
         <div className="animeBar">
-          <h2 className="animeName">ANIMES WATCHED</h2>
+          <h1 className="animeName">ANIMES WATCHED</h1>
           <div>
             <label htmlFor="order">Order By: </label>
-            <select name="order" id="order" onChange={() => setRender((state) => !state)}>
+            <select name="order" id="order" onChange={() => changeOrder()}>
               <option value="first">First Watched</option>
               <option value="last">Last Watched</option>
             </select>

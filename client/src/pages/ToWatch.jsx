@@ -41,7 +41,7 @@ function ToWatch() {
     return (
       <div className="to-watch">
         <div className="animeBar">
-          <h2 className="animeName">ANIMES TO WATCH</h2>
+          <h1 className="animeName">ANIMES TO WATCH</h1>
         </div>
 
         {animes ? (

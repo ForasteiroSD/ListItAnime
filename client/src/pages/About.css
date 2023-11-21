@@ -1,0 +1,43 @@
+.about {
+    padding: 0 3rem;
+}
+
+.about .info {
+    font-size: 1.2rem;
+    text-align: justify;
+    margin-bottom: 5rem;
+}
+
+.about .aboutUs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.about .aboutUs .data {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.about .aboutUs figure {
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+}
+
+.about .aboutUs .data figure img{
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+}
+
+.about .aboutUs .data .texts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20rem;
+}

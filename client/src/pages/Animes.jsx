@@ -77,7 +77,7 @@ function Animes() {
   else return (
     <>
       <div className="animeBar">
-        <h2 className="animeName">{animeName}</h2>
+        <h1 className="animeName">{animeName}</h1>
         <div className="boxSearchBar">
           <input
             type="text"
@@ -104,7 +104,7 @@ function Animes() {
               />
             ))
           ) : (
-            <h2>Sorry, we could not find this anime.</h2>
+            <h1>Sorry, we could not find this anime.</h1>
           )}
         </div>
       ) : (

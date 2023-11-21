@@ -5,7 +5,7 @@ import "./ShowInfoAnime.css";
 import Axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
-import {AiOutlineClose} from 'react-icons/ai'
+import { AiOutlineClose } from "react-icons/ai";
 import GiveScore from "./GiveScore";
 
 function ShowInfoAnime({ anime, setShow, setModalOpen }) {
@@ -17,12 +17,12 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
   let timer;
 
   async function insertAnime(list) {
-    if (list === "To Watch" && toWatch === true) {
-      setInfoInsert("error");
-    } else if (list === "Watched" && watched) {
-      setInfoInsert("error");
-    } else {
-      if (list === "To Watch") {
+    if (list === "To Watch") {
+      if (toWatch === "watched") {
+        setInfoInsert("watched");
+      } else if (toWatch === true) {
+        setInfoInsert("error");
+      } else {
         const response = (
           await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
             params: { userId: Cookies.get("id"), list: list, anime: anime },
@@ -33,9 +33,13 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
           setToWatch(true);
         } else if (response === "Anime already watched") {
           setInfoInsert("watched");
-          setToWatch(true);
+          setToWatch("watched");
           setWatched(true);
         } else setInfoInsert("error");
+      }
+    } else {
+      if (watched) {
+        setInfoInsert("error");
       } else {
         setScore(true);
       }
@@ -60,10 +64,19 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
           <button className="closeButton" onClick={closeModal}>
             <AiOutlineClose className="closeButtonIcon" />
           </button>
-          <div className="BackgroundImage" style={{backgroundImage: 'url("' + anime.images.jpg.large_image_url + '")'}}>
+          <div
+            className="BackgroundImage"
+            style={{
+              backgroundImage:
+                'url("' + anime.images.jpg.large_image_url + '")',
+            }}
+          >
             <div className="BackgroundImageBlur">
               <figure>
-                <img src={anime.images.jpg.large_image_url} alt="Anime picture" />
+                <img
+                  src={anime.images.jpg.large_image_url}
+                  alt="Anime picture"
+                />
               </figure>
             </div>
           </div>
