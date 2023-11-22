@@ -330,27 +330,49 @@ app.get("/editScore", async (req: any, res: Response) => {
     }
 });
 
-app.get("/get/topAnimes", async(req: Request, res: Response) => {
+app.post("/get/topAnimes", async(req: any, res: Response) => {
+    // try {
+    //     let response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=1');
+    //     let dados = response.data.data;
+    //     let answer : any[] = [];
+    //     dados.forEach((anime: any) => {
+    //         answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+    //     });
+    //     response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=2');
+    //     dados = response.data.data;
+    //     dados.forEach((anime: any) => {
+    //         answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+    //     });
+    //     response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=3');
+    //     dados = response.data.data;
+    //     dados.forEach((anime: any) => {
+    //         answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+    //     });
+    //     res.send(answer);
+    // } catch (error) {
+    //     res.send([]);
+    // }
+
+    const {userId} = req.body;
 
     try {
-        let response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=1');
-        let dados = response.data.data;
-        let answer : any[] = [];
-        dados.forEach((anime: any) => {
-            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+        const topList = await prisma.list.findFirst({
+            where: {
+                name: 'Top List',
+                userId: userId
+            }
         });
-        response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=2');
-        dados = response.data.data;
-        dados.forEach((anime: any) => {
-            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
+
+        const animes = await prisma.anime.findMany({
+            where: {
+                listId: topList?.id
+            }
         });
-        response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=3');
-        dados = response.data.data;
-        dados.forEach((anime: any) => {
-            answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
-        });
-        res.send(answer);
+
+        animes.sort((a: any, b: any) => b.position_score - a.position_score);
+        
+        res.send(animes);
     } catch (error) {
-        res.send([]);
+        res.send('Failed to edit');
     }
 });

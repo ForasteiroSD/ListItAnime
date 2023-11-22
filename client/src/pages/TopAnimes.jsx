@@ -13,7 +13,8 @@ function TopAnimes() {
   const [animes, setAnimes] = useState()
 
   async function getThisSeasonAnimes() {
-    const response = await Axios.get("http://127.0.0.1:5000/get/topAnimes");
+    const response = await Axios.post("http://127.0.0.1:5000/get/topAnimes", {userId: Cookies.get('id')});
+    console.log(response.data)
     setAnimes(response.data);
   }
 
@@ -26,18 +27,28 @@ function TopAnimes() {
     <>
       <section className='TopAnimes'>
         <h1 className="text">TOP ANIMES</h1>
-        <div className='animes'>
+        
           {animes ? (
-            animes.map((anime, i) => {
-              let synopsis;
-              if(anime.synopsis) synopsis = anime.synopsis;
-              else synopsis = 'No synopsis found'
-              return <TopAnime key={anime.mal_id} title={anime.title} image={anime.image} position={i+1} synopsis={synopsis} score={anime.score}/>
-            })
+            //Busca realizada
+            animes.length > 0 ? (
+              //Existem animes na lista
+              <div className='animes'> {
+                animes.map((anime, i) => {
+                  let synopsis;
+                  if(anime.synopsis) synopsis = anime.synopsis;
+                  else synopsis = 'No synopsis found'
+                  return <TopAnime key={anime.mal_id} title={anime.title} image={anime.image} position={i+1} synopsis={synopsis} score={anime.position_score}/>
+                })}
+              </div>
+            ) : (
+              //Não existem animes na lista
+              <h2 className='noTopAnime'>Looks like you haven't rated any anime yet</h2>
+            )
           ) : (
-            <h2>No anime watched has received a rating yet.</h2>
+            //Carregando
+            <h2 className='noTopAnime'>Loading...</h2>
           )}
-        </div>
+        
       </section>
     </>
   )
