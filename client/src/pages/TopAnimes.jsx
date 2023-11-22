@@ -29,14 +29,10 @@ function TopAnimes() {
         <div className='animes'>
           {animes ? (
             animes.map((anime, i) => {
-              let title, synopsis;
-              if (anime.title.length > 50) title = anime.title.slice(0, 51) + "...";
-              else title =  anime.title;
-              if(anime.synopsis) {
-                if (anime.synopsis.length > 100) synopsis =  anime.synopsis.slice(0, 101) + "...";
-                else synopsis =  anime.synopsis;
-              } else synopsis = 'No synopsis found'
-              return <TopAnime key={anime.mal_id} title={title} image={anime.image} position={i+1} synopsis={synopsis} score={anime.score}/>
+              let synopsis;
+              if(anime.synopsis) synopsis = anime.synopsis;
+              else synopsis = 'No synopsis found'
+              return <TopAnime key={anime.mal_id} title={anime.title} image={anime.image} position={i+1} synopsis={synopsis} score={anime.score}/>
             })
           ) : (
             <h2>No anime watched has received a rating yet.</h2>

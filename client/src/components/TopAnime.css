@@ -30,23 +30,11 @@
 
 .TopAnime {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-bottom: solid var(--border-nav) 1px;
     overflow: hidden;
     width: 100%;
-}
-
-.TopAnime .info {
-    display: flex;
-    align-items: center;
-}
-
-.TopAnimes .animes {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    /* flex-wrap: wrap; */
 }
 
 .TopAnime .animeImage {
@@ -65,25 +53,37 @@
     font-family: RegaveDemibold;
 }
 
-.TopAnime .animeTitle {
-    margin: 0;
-    font-size: 1.8rem;
+.TopAnime .info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
     padding-left: 2rem;
-    color: var(--text);
     font-family: Raleway;
 }
 
+.TopAnime .animeTitle {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--text);
+    overflow: hidden;
+    max-height: 70px;
+    text-overflow: ellipsis;
+}
+
 .TopAnime .info .sinopse {
-    padding-left: 2rem;
     color: var(--anime-position);
-    font-family: Raleway;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .TopAnime .score {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
-    padding-left: 0.5rem;
+    align-items: center;
+    padding: 0 1rem 0 3rem;
     text-align: center;
     color: var(--text);
     font-family: RegaveDemibold;
@@ -91,43 +91,37 @@
     text-transform: uppercase;
 }
 
-.TopAnime .score p {
-    margin: 0;
-}
-
 @media (max-width: 1120px) {
     .TopAnime .animeImage {
         min-width: 200px;
     }
-    
     .TopAnime .position {
         font-size: 5rem;
         padding-left: 1rem;
     }
-    
     .TopAnime .animeTitle {
         font-size: 1.4rem;
         padding-left: 1rem;
+        max-height: 130px;
     }
-    
     .TopAnime .info .sinopse {
-        padding-left: 1rem;
+        display: none;
     }
-    
     .TopAnime .score {
         font-size: 2rem;
     }
 }
 
 @media (max-width: 800px) {
+    .TopAnime .animeTitle {
+        max-height: 80px;
+    }
     .TopAnime .animeImage {
         min-width: 150px;
     }
-
     .TopAnime .info .sinopse {
         display: none;
     }
-    
     .TopAnime .score {
         font-size: 2rem;
     }
@@ -143,11 +137,9 @@
     .TopAnime .position {
         font-size: 3.5rem;
     }
-    
     .TopAnime .animeTitle {
         font-size: 1rem;
     }
-
     .TopAnime .score {
         font-size: 1.5rem;
     }

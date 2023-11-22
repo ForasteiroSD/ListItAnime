@@ -23,17 +23,14 @@ function TopAnime({title, image, position, synopsis, score}) {
 
     return (
         <div className="TopAnime">
+            <div className='animeImage' style={imageCss}/>
+            <p className="position">{position}</p>
             <div className='info'>
-                <div className='animeImage' style={imageCss}/>
-                <p className="position">{position}</p>
-                <div>
-                    <h2 className='animeTitle'>{title}</h2>
-                    <p className='sinopse'>{synopsis}</p>
-                </div>
+                <h2 className='animeTitle'>{title}</h2>
+                <p className='sinopse'>{synopsis}</p>
             </div>
             <div className='score'>
-                {/* <p>Score</p> */}
-                <p>{score}</p>
+                <p >{score}</p>
                 <AiFillStar />
             </div>
         </div>
