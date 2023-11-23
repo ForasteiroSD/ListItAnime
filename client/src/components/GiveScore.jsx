@@ -125,6 +125,10 @@ function GiveScore({
               Type the score you want to rate this anime from 0 to 10:
             </label>
             <input
+              type="number"
+              min="0"
+              max="10"
+              step="0.01"
               id="score"
               name="score"
               placeholder="Ex: 8.68"
