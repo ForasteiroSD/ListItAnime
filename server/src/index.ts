@@ -287,16 +287,21 @@ app.get("/removeAnime", async (req: any, res: Response) => {
     }
 });
 
-app.get("/get/nickname", async (req: Request, res: Response) => {
+app.get("/get/userData", async (req: Request, res: Response) => {
     const {id} = req.query;
-
+    
     try {
         const user = await prisma.user.findFirst({
             where: {
                 id: String(id)
+            },
+            select: {
+                email: true,
+                nickname: true
             }
         });
-        if(user) res.send(user.nickname);
+
+        if(user) res.send(user);
     } catch (error) {
         res.send('Database off, sorry');
     }
@@ -352,5 +357,29 @@ app.get("/get/topAnimes", async(req: Request, res: Response) => {
         res.send(answer);
     } catch (error) {
         res.send([]);
+    }
+});
+
+app.post("/changeData", async (req: Request, res: Response) => {
+    const {userId, email, password, newPassword, nickname} = req.body;
+    
+    try {
+        const user = await prisma.user.update({
+            where: {
+                id: String(userId),
+                password: password
+            },
+            data: {
+                email: email,
+                nickname: nickname,
+                password: newPassword
+            }
+        });
+
+        res.send('Data changed');
+        
+    } catch (error: any) {
+        if(error.code === 'P2025') res.send('Invalid Data');
+        else res.send('Email already in use');
     }
 });

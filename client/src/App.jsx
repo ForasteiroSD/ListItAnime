@@ -10,6 +10,7 @@ import TopAnimes from "./pages/TopAnimes";
 import ToWatch from "./pages/ToWatch";
 import Watched from "./pages/Watched";
 import About from "./pages/About";
+import ChangeData from "./pages/ChangeData";
 
 //Packages
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -57,7 +58,9 @@ function LogoutButton({ nickname }) {
         <div className="userOptions">
           <ul>
             <li>{nickname}</li>
-            <li>Change Password</li>
+            <li>
+              <a href="/changedata">Change Data</a>
+            </li>
             <li onClick={removeCookie}>
               Logout <TbLogout className="logoutIcon" />
             </li>
@@ -71,6 +74,7 @@ function LogoutButton({ nickname }) {
 function App() {
   const [themeIcon, setThemeIcon] = useState(<BsFillBrightnessHighFill />);
   const [nickname, setNickname] = useState();
+  const [email, setEmail] = useState();
 
   const changeIcon = () => {
     const newMode = toggleMode();
@@ -84,13 +88,16 @@ function App() {
     changeLogoTheme();
   };
 
-  const getNickname = async () => {
+  const getUserData = async () => {
     const response = (
       await Axios.get(
-        "http://127.0.0.1:5000/get/nickname?id=" + Cookies.get("id")
+        "http://127.0.0.1:5000/get/userData?id=" + Cookies.get("id")
       )
     ).data;
-    if (response != "Database off, sorry") setNickname(response);
+    if (response != "Database off, sorry") {
+      setNickname(response.nickname);
+      setEmail(response.email)
+    }
   };
 
   useEffect(() => {
@@ -99,9 +106,9 @@ function App() {
     if (mode) {
       if (mode === "white") changeIcon();
     } else Cookies.set("mode", "dark", { expires: 365 });
-
-    //Get nickname
-    getNickname();
+    
+    //get user data
+    getUserData();
   }, []);
 
   return (
@@ -109,16 +116,21 @@ function App() {
       <button className="toggleMode" onClick={changeIcon} title="Change mode">
         {themeIcon}
       </button>
-      {Cookies.get("id") ? <LogoutButton nickname={nickname} /> : null}
+      {Cookies.get("id") ? (
+        <Router>
+          <LogoutButton nickname={nickname} />
+        </Router>
+      ) : null}
       <Router>
         {Cookies.get("id") ? <NavBar /> : null}
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Animes />} />
           <Route path="/topanimes" element={<TopAnimes />} />
-          <Route path="/about" element={<About />} />
           <Route path="/towatch" element={<ToWatch />} />
           <Route path="/watched" element={<Watched />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/changedata" element={<ChangeData nickname={nickname} email={email}/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -1,0 +1,95 @@
+.changedata {
+    margin-top: 3rem;
+}
+
+.changedata .data {
+    position: relative;
+    width: 35%;
+    min-width: 25rem;
+    margin: 0 auto;
+    border: 1px solid var(--border-nav);
+    background-color: var(--background-nav);
+    border-radius: 15px;
+    padding: 2rem 1rem;
+}
+
+.changedata h2 {
+    text-align: center;
+}
+
+.changedata form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.changedata form .login-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 30rem;
+    width: 100%;
+    max-width: 30rem;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.changedata form .login-data .inputs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.changedata form .login-data .inputs .alert {
+    position: absolute;
+    bottom: -22px;
+    margin: 0;
+    padding: 0;
+    color: #B02817;
+}
+
+.changedata form .login-data .big-alert {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.changedata form .login-data .wrong {
+    color: #B02817;
+}
+
+.changedata form .login-data .right {
+    color: green;
+}
+
+.changedata form .login-data .inputs .password {
+    margin-top: 0px;
+    color: #B02817;
+}
+
+.changedata .login-data input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-left: -0.2rem;
+    background-color: var(--background-nav);
+    border: 1px solid var(--border-nav);
+    border-radius: 10px;
+    outline: none;
+    color: var(--text);
+    font-size: 1.05rem;
+    box-sizing: border-box;
+}
+
+.changedata .login-data .buttons button {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.8rem;
+    color: white;
+    border: 1px solid var(--border-nav);
+    border-radius: 10px;
+    background-color: var(--highlight);
+    cursor: pointer;
+    font-size: 1rem;
+}

@@ -73,6 +73,11 @@ body {
     align-items: center;
 }
 
+.userSettings a {
+    text-decoration: none;
+    color: var(--text);
+}
+
 .user {
     width: 2.5rem;
     height: 2.5rem;
