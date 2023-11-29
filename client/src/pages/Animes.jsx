@@ -104,7 +104,7 @@ function Animes() {
               />
             ))
           ) : (
-            <h1>Sorry, we could not find this anime.</h1>
+            <h2>Sorry, we could not find this anime.</h2>
           )}
         </div>
       ) : (

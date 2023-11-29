@@ -11,7 +11,6 @@
     border-radius: 1.5rem;
     overflow: hidden;
     border: solid var(--border-nav) 1px;
-    border-bottom: 0;
     width: 80%;
     margin-bottom: 100px;
     /* flex-wrap: wrap; */
@@ -23,4 +22,8 @@
     font-family: Raleway;
     margin: 0;
     margin: 2rem 0 2rem 5%;
+}
+
+.noTopAnime {
+    text-align: center;
 }

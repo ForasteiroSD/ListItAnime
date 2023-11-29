@@ -126,6 +126,9 @@ function GiveScore({
             </label>
             <input
               type="number"
+              min="0"
+              max="10"
+              step="0.01"
               id="score"
               name="score"
               placeholder="Ex: 8.68"
