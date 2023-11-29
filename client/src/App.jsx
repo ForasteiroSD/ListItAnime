@@ -117,9 +117,7 @@ function App() {
         {themeIcon}
       </button>
       {Cookies.get("id") ? (
-        <Router>
           <LogoutButton nickname={nickname} />
-        </Router>
       ) : null}
       <Router>
         {Cookies.get("id") ? <NavBar /> : null}

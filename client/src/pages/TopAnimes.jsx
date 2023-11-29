@@ -12,14 +12,13 @@ import './TopAnimes.css'
 function TopAnimes() {
   const [animes, setAnimes] = useState()
 
-  async function getThisSeasonAnimes() {
+  async function getTopAnimes() {
     const response = await Axios.post("http://127.0.0.1:5000/get/topAnimes", {userId: Cookies.get('id')});
-    console.log(response.data)
     setAnimes(response.data);
   }
 
   useEffect(() => {
-    getThisSeasonAnimes();
+    getTopAnimes();
   }, []);
 
   if(!Cookies.get('id')) window.location.href = "/login";

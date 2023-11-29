@@ -14,8 +14,14 @@ function ChangeData({ nickname, email }) {
   const [newPasswordInvalid, setNewPasswordInvalid] = useState(false);
   const [confirm, setConfirm] = useState(true);
   const [confirmData, setConfirmData] = useState();
+  const [updated, setUpdated] = useState(false);
 
   async function Change() {
+    if (updated) {
+      setInvaliData("Data already changed, try again later");
+      return;
+    }
+
     const inputEmail = document.querySelector("#email");
     const inputPassword = document.querySelector("#password");
     const inputNickname = document.querySelector("#nickname");
@@ -33,9 +39,12 @@ function ChangeData({ nickname, email }) {
         nickname: inputNickname.value,
       })
     ).data;
-    if (response === "Invalid Data") setInvaliData(true);
+    if (response === "Invalid Data") setInvaliData("Wrong Password");
     else if (response === "Email already in use") setEmailInUse(true);
-    else setInvaliData("updated");
+    else {
+      setUpdated(true);
+      setInvaliData("Data changed");
+    }
   }
 
   function validate(e) {
@@ -125,7 +134,10 @@ function ChangeData({ nickname, email }) {
                   id="new_password"
                   name="new_password"
                   placeholder="•••••••••••"
-                  onChange={() => setNewPasswordInvalid(false)}
+                  onChange={() => {
+                    setNewPasswordInvalid(false);
+                    setConfirm(true);
+                  }}
                   required
                 />
                 {newPasswordInvalid && (
@@ -157,10 +169,10 @@ function ChangeData({ nickname, email }) {
                 <button>Change Data</button>
               </div>
               {invalidData ? (
-                invalidData === true ? (
-                  <p className="wrong big-alert">Wrong Password</p>
-                ) : (
+                invalidData === "Data changed" ? (
                   <p className="right big-alert">Data changed</p>
+                ) : (
+                  <p className="wrong big-alert">{invalidData}</p>
                 )
               ) : null}
             </div>

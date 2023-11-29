@@ -47,7 +47,6 @@ function GiveScore({
       if (response === "Anime inserted successfully") {
         if (setAlreadyWatched) {
           setMarkWatched(false);
-          setAlreadyWatched(true);
         }
         else {
           document.body.style.overflowY = "auto";
@@ -55,6 +54,8 @@ function GiveScore({
           setRenderAgain((state) => !state);
         }
       }
+
+      if(setAlreadyWatched) setAlreadyWatched(true);
 
       setInfo(response);
     }

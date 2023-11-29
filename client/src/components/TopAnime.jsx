@@ -6,20 +6,10 @@ import {AiFillStar} from 'react-icons/ai'
 import './TopAnime.css'
 
 function TopAnime({title, image, position, synopsis, score}) {
-    const [positionColor, setPositionColor] = useState();
 
     const imageCss = {
         backgroundImage: "linear-gradient(to right, transparent 20%, var(--background)), url('" + image + "')"
     }
-
-    useEffect(() => {
-        let positionColor
-        if(position === 1) positionColor = {color: 'lightgreen'}
-        else if(position === 2) positionColor = {color: 'lightblue'}
-        else if(position === 3) positionColor = {color: 'lightyellow'}
-        else positionColor = {color: 'var(--text)'}
-        setPositionColor(positionColor);
-    }, []);
 
     return (
         <div className="TopAnime">
