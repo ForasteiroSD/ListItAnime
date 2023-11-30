@@ -25,7 +25,9 @@ function TopAnimes() {
   else return (
     <>
       <section className='TopAnimes'>
-        <h1 className="text">TOP ANIMES</h1>
+        <div className="animeBar">
+          <h1 className="animeName">TOP ANIMES</h1>
+        </div>
         
           {animes ? (
             //Busca realizada

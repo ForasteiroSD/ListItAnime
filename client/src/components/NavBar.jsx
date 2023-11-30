@@ -29,7 +29,7 @@ function NavBar() {
     },
   ];
   return (
-    <>
+    <div className="NavBar">
       <SmallLogo />
       <nav className="menu">
         <ul>
@@ -44,7 +44,7 @@ function NavBar() {
           })}
         </ul>
       </nav>
-    </>
+    </div>
   );
 }
 

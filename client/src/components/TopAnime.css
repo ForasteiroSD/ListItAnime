@@ -1,33 +1,3 @@
-@font-face {
-    font-family: BellotaText;
-    src: url(../../public/BellotaText-Regular.ttf);
-}
-
-@font-face {
-    font-family: Raleway;
-    src: url(../../public/Raleway-VariableFont_wght.ttf);
-}
-
-@font-face {
-    font-family: RegaveDemibold;
-    src: url(./RegaveDemibold-nRZrJ.ttf);
-}
-
-@font-face {
-    font-family: Geneva01;
-    src: url(../../public/Geneva01-6YX1M.ttf);
-}
-
-@font-face {
-    font-family: NewAthleticM54;
-    src: url(../../public/NewAthleticM54-31vz.ttf);
-}
-
-@font-face {
-    font-family: SuperstarM54;
-    src: url(../../public/SuperstarM54-Zq6K.ttf);
-}
-
 .TopAnime {
     display: flex;
     justify-content: center;
@@ -93,6 +63,11 @@
     font-family: RegaveDemibold;
     font-size: 3rem;
     text-transform: uppercase;
+}
+
+.TopAnime .score p {
+    font-family: RegaveDemibold;
+    font-size: 3rem;
 }
 
 @media (max-width: 1120px) {

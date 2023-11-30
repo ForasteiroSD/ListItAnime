@@ -16,14 +16,6 @@
     /* flex-wrap: wrap; */
 }
 
-.TopAnimes .text {
-    font-size: 35px;
-    font-weight: 300;
-    font-family: Raleway;
-    margin: 0;
-    margin: 2rem 0 2rem 5%;
-}
-
 .noTopAnime {
     text-align: center;
 }

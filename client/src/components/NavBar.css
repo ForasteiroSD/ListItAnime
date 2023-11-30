@@ -10,7 +10,7 @@
 .menu ul {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 0 auto;
     padding: 0;
 }
@@ -19,7 +19,6 @@
     display: inline;
     width: 15%;
     position: relative;
-    margin: 0 auto;
     padding: 1em 0;
     text-align: center;
     font-size: 1.3em;
@@ -48,8 +47,21 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 790px) {
+    .menu {
+        width: 100%;
+        border: 0;
+        border-radius: 0;
+        background-color: var(--background);
+    }
+    .menu li {
+        width: 18%;
+    }
+}
+
+
+/* @media (max-width: 500px) {
     .menu li {
         font-size: 0.8rem;
     }
-}
+} */

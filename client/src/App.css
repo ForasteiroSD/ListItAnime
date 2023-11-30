@@ -1,3 +1,33 @@
+@font-face {
+    font-family: BellotaText;
+    src: url(../../public/BellotaText-Regular.ttf);
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../../public/Raleway-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: RegaveDemibold;
+    src: url(./RegaveDemibold-nRZrJ.ttf);
+}
+
+@font-face {
+    font-family: Geneva01;
+    src: url(../../public/Geneva01-6YX1M.ttf);
+}
+
+@font-face {
+    font-family: NewAthleticM54;
+    src: url(../../public/NewAthleticM54-31vz.ttf);
+}
+
+@font-face {
+    font-family: SuperstarM54;
+    src: url(../../public/SuperstarM54-Zq6K.ttf);
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 :root {
     --background: #121214;
@@ -27,12 +57,16 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+p {
+    font-family: Raleway;
 }
 
 body {
@@ -63,7 +97,6 @@ body {
     margin-top: 1px;
     fill: var(--text);
 }
-
 
 .userSettings {
     position: absolute;
@@ -114,12 +147,12 @@ body {
     animation: showOptions 1s;
 }
 
-.userSettings .userOptions ul{
+.userSettings .userOptions ul {
     padding: 0;
     margin: 0;
 }
 
-.userSettings .userOptions ul li{
+.userSettings .userOptions ul li {
     list-style-type: none;
     padding: 0.3rem 0.8rem;
     display: flex;
@@ -128,17 +161,17 @@ body {
     cursor: pointer;
 }
 
-.userSettings .userOptions ul li .logoutIcon{
+.userSettings .userOptions ul li .logoutIcon {
     width: 1.2rem;
     height: 1.2rem;
 }
 
-.userSettings .userOptions ul li:nth-of-type(1){
+.userSettings .userOptions ul li:nth-of-type(1) {
     cursor: auto;
     display: none;
 }
 
-.userSettings .userOptions ul li:nth-of-type(2){
+.userSettings .userOptions ul li:nth-of-type(2) {
     /* border-top: 1px solid var(--border-nav); */
     border-bottom: 1px solid var(--border-nav);
 }
@@ -147,23 +180,46 @@ body {
     .userSettings p {
         display: none;
     }
-
     .userSettings .userOptions {
         top: 2.2rem;
         font-size: 0.7rem;
         width: 7.5rem;
     }
-
-    .userSettings .userOptions ul li .logoutIcon{
+    .userSettings .userOptions ul li .logoutIcon {
         width: 0.9rem;
         height: 0.9rem;
     }
-
-    .userSettings .userOptions ul li:nth-of-type(1){
+    .userSettings .userOptions ul li:nth-of-type(1) {
         display: block;
     }
-    
-    .userSettings .userOptions ul li:nth-of-type(2){
+    .userSettings .userOptions ul li:nth-of-type(2) {
+        border-top: 1px solid var(--border-nav);
+    }
+}
+
+@media (max-width: 768px) {
+    .Title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 570px) {
+    .userSettings p {
+        display: none;
+    }
+    .userSettings .userOptions {
+        top: 2.2rem;
+        font-size: 0.7rem;
+        width: 7.5rem;
+    }
+    .userSettings .userOptions ul li .logoutIcon {
+        width: 0.9rem;
+        height: 0.9rem;
+    }
+    .userSettings .userOptions ul li:nth-of-type(1) {
+        display: block;
+    }
+    .userSettings .userOptions ul li:nth-of-type(2) {
         border-top: 1px solid var(--border-nav);
     }
 }

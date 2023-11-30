@@ -6,6 +6,6 @@
     color: var(--text);
 }
 
-.watched .animeBar #order option{
+.watched .animeBar #order option {
     border-radius: 10px;
 }
