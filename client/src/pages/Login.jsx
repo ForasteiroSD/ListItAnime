@@ -3,7 +3,7 @@ import { z } from "zod";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import Cookies from "js-cookie";
-import {sha256} from "js-sha256";
+import { sha256 } from "js-sha256";
 
 function Login() {
   const emailSchema = z.string().email();
@@ -25,7 +25,7 @@ function Login() {
     const response = (
       await Axios.post("http://127.0.0.1:5000/sign", {
         email: inputEmail.value,
-        password: sha256.hmac('lytuhiçjdswxafgqvbjanoikl', inputPassword.value),
+        password: sha256.hmac("lytuhiçjdswxafgqvbjanoikl", inputPassword.value),
         nickname: nickname,
       })
     ).data;
@@ -71,8 +71,10 @@ function Login() {
                 <h1>Log In</h1>
                 <p>Welcome! Please enter your details</p>
               </div>
-              {invalidData && <p className="wrong">Wrong Email or Password</p>}
               <div className="inputs">
+                {invalidData && (
+                  <p className="wrong">Wrong Email or Password</p>
+                )}
                 <label htmlFor="email">Email</label>
                 <div>
                   <input
@@ -115,8 +117,8 @@ function Login() {
                 Don't have an account?{" "}
                 <span
                   onClick={() => {
-                    document.querySelector("#email").value = '';
-                    document.querySelector("#password").value = '';
+                    document.querySelector("#email").value = "";
+                    document.querySelector("#password").value = "";
                     setSingUp(true);
                     setEmailValid(true);
                     setPasswordInvalid(false);
@@ -206,10 +208,10 @@ function Login() {
                 Go back to{" "}
                 <span
                   onClick={() => {
-                    document.querySelector("#email").value = '';
-                    document.querySelector("#nickname").value = '';
-                    document.querySelector("#password").value = '';
-                    document.querySelector("#confirmPass").value = '';
+                    document.querySelector("#email").value = "";
+                    document.querySelector("#nickname").value = "";
+                    document.querySelector("#password").value = "";
+                    document.querySelector("#confirmPass").value = "";
                     setSingUp(false);
                     setConfirmData(undefined);
                     setEmailValid(true);

@@ -13,7 +13,7 @@ import About from "./pages/About";
 import ChangeData from "./pages/ChangeData";
 
 //Packages
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MdDarkMode } from "react-icons/md";
 import { BsFillBrightnessHighFill } from "react-icons/bs";
@@ -59,7 +59,7 @@ function LogoutButton({ nickname }) {
           <ul>
             <li>{nickname}</li>
             <li>
-              <a href="/changedata">Change Data</a>
+              <Link to="/changedata">Change Data</Link>
             </li>
             <li onClick={removeCookie}>
               Logout <TbLogout className="logoutIcon" />
@@ -96,7 +96,7 @@ function App() {
     ).data;
     if (response != "Database off, sorry") {
       setNickname(response.nickname);
-      setEmail(response.email)
+      setEmail(response.email);
     }
   };
 
@@ -106,20 +106,19 @@ function App() {
     if (mode) {
       if (mode === "white") changeIcon();
     } else Cookies.set("mode", "dark", { expires: 365 });
-    
+
     //get user data
     getUserData();
   }, []);
 
   return (
     <>
-      <button className="toggleMode" onClick={changeIcon} title="Change mode">
-        {themeIcon}
-      </button>
-      {Cookies.get("id") ? (
-          <LogoutButton nickname={nickname} />
-      ) : null}
       <Router>
+        <button className="toggleMode" onClick={changeIcon} title="Change mode">
+          {themeIcon}
+        </button>
+        {Cookies.get("id") ? <LogoutButton nickname={nickname} /> : null}
+
         {Cookies.get("id") ? <NavBar /> : null}
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -128,7 +127,10 @@ function App() {
           <Route path="/towatch" element={<ToWatch />} />
           <Route path="/watched" element={<Watched />} />
           <Route path="/about" element={<About />} />
-          <Route path="/changedata" element={<ChangeData nickname={nickname} email={email}/>} />
+          <Route
+            path="/changedata"
+            element={<ChangeData nickname={nickname} email={email} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
