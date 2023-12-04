@@ -129,7 +129,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route
             path="/changedata"
-            element={<ChangeData nickname={nickname} email={email} />}
+            element={<ChangeData setNickname={setNickname} setEmail={setEmail} email={email} nickname={nickname}/>}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

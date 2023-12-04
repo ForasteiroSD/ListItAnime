@@ -52,7 +52,7 @@
 
 .changedata form .login-data .big-alert {
     position: absolute;
-    bottom: -5px;
+    bottom: -9px;
     left: 50%;
     transform: translateX(-50%);
 }

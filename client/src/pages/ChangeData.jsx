@@ -5,7 +5,7 @@ import { useState } from "react";
 import { sha256 } from "js-sha256";
 import Axios from "axios";
 
-function ChangeData({ nickname, email }) {
+function ChangeData({ setNickname, setEmail, email, nickname }) {
   const emailSchema = z.string().email();
   const [invalidData, setInvaliData] = useState(false);
   const [emailValid, setEmailValid] = useState(true);
@@ -42,6 +42,8 @@ function ChangeData({ nickname, email }) {
     if (response === "Invalid Data") setInvaliData("Wrong Password");
     else if (response === "Email already in use") setEmailInUse(true);
     else {
+      setNickname(inputNickname.value);
+      setEmail(inputEmail.value);
       setUpdated(true);
       setInvaliData("Data changed");
     }
