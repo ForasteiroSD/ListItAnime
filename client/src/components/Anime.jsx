@@ -98,6 +98,7 @@ function Anime({
               <figure>
                 <img src={image} alt={title + " image"} />
               </figure>
+              {title && <p className="text">{title}</p>}
             </div>
           </div>
         </>
