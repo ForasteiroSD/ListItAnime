@@ -211,7 +211,7 @@ app.get("/insertToWatchWatched", async(req: any, res: Response) => {
 
 app.get("/getAnimesList", async(req: any, res: Response) => {
 
-    const { list, userId, order } = req.query;
+    const { list, userId } = req.query;
 
     const List = await prisma.list.findFirst({
         where: {
@@ -219,15 +219,18 @@ app.get("/getAnimesList", async(req: any, res: Response) => {
             userId: userId
         }
     });
+
+    if(!List) {
+        res.send([]);
+        return;
+    }
+
     const animes = await prisma.anime.findMany({
         where: {
             listId: List?.id
         }
     });
-
-    if(order === 'last') {
-        return res.send(animes.reverse());
-    }
+    
     res.send(animes);
 });
 
@@ -336,28 +339,6 @@ app.get("/editScore", async (req: any, res: Response) => {
 });
 
 app.post("/get/topAnimes", async(req: any, res: Response) => {
-    // try {
-    //     let response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=1');
-    //     let dados = response.data.data;
-    //     let answer : any[] = [];
-    //     dados.forEach((anime: any) => {
-    //         answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
-    //     });
-    //     response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=2');
-    //     dados = response.data.data;
-    //     dados.forEach((anime: any) => {
-    //         answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
-    //     });
-    //     response = await Axios.get('https://api.jikan.moe/v4/seasons/now?sfw&page=3');
-    //     dados = response.data.data;
-    //     dados.forEach((anime: any) => {
-    //         answer.push({ "mal_id": anime.mal_id, "title": anime.title, "image": anime.images.webp.large_image_url, "synopsis": anime.synopsis, "score": anime.score });
-    //     });
-    //     res.send(answer);
-    // } catch (error) {
-    //     res.send([]);
-    // }
-
     const {userId} = req.body;
 
     try {
@@ -367,6 +348,11 @@ app.post("/get/topAnimes", async(req: any, res: Response) => {
                 userId: userId
             }
         });
+
+        if(!topList) {
+            res.send([]);
+            return;
+        }
 
         const animes = await prisma.anime.findMany({
             where: {

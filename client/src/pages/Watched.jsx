@@ -24,12 +24,9 @@ function Watched() {
   const [order, setOrder] = useState();
 
   async function getAnimes() {
-    const select = document.querySelector("#order");
-    let order;
-    if (select) order = select.value;
     const response = (
       await Axios.get("http://127.0.0.1:5000/getAnimesList", {
-        params: { userId: Cookies.get("id"), list: "Watched", order: order },
+        params: { userId: Cookies.get("id"), list: "Watched" },
       })
     ).data;
     setAnimes(response);
