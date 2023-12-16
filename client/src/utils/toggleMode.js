@@ -1,3 +1,6 @@
+import darkLogoImg from "../assets/Dark-Mode-Alto.png"
+import whiteLogoImg from "../assets/White-Mode-Alto.png"
+
 export function toggleMode() {
     const root = document.querySelector(':root');
     if (root.style.getPropertyValue('--background') === '#e9e9e9') {
@@ -9,7 +12,7 @@ export function toggleMode() {
         root.style.setProperty('--highlight', '#4e84fa');
         root.style.setProperty('--skeleton', 'rgb(54, 54, 54)');
         root.style.setProperty('--anime-position', 'rgb(185, 185, 185)');
-        root.style.setProperty('--image', 'url(./White-Mode-Alto.png)');
+        root.style.setProperty('--image', 'url(' + whiteLogoImg + ')');
         return 'dark';
     } else {
         root.style.setProperty('--background', '#e9e9e9');
@@ -20,7 +23,7 @@ export function toggleMode() {
         root.style.setProperty('--highlight', '#574EFA');
         root.style.setProperty('--skeleton', 'rgb(154, 154, 154)');
         root.style.setProperty('--anime-position', 'rgb(105, 105, 105)');
-        root.style.setProperty('--image', 'url(./Dark-Mode-Alto.png)');
+        root.style.setProperty('--image', 'url(' + darkLogoImg + ')');
         return 'white';
     }
 }

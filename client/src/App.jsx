@@ -38,39 +38,42 @@ function LogoutButton({ nickname }) {
   };
 
   return (
-    <div
-      className="userSettings"
-      // onBlur={() => {
-      //   setTimeout(() => {
-      //     setOptionsDisplay(false);
-      //   }, 200);
-      // }}
-    >
-      <button
-        className="user"
-        onClick={() => setOptionsDisplay((state) => !state)}
-        title="User Settings"
+    <>
+      <div
+        className="userSettings"
+        //No toutch pad n funciona :(
+        // onBlur={() => {
+        //   setTimeout(() => {
+        //     setOptionsDisplay(false);
+        //   }, 200);
+        // }}
       >
-        <FaUserCircle className="userIcon" />
-      </button>
-      <p>{nickname}</p>
-      {optionsDisplay && (
-        <div className="userOptions">
-          <ul>
-            <li>{nickname}</li>
-            <li onClick={() => setOptionsDisplay((state) => !state)}>
-              <Link to="/changedata">Change Data</Link>
-            </li>
-            <li onClick={() => {
-                removeCookie();
-                setOptionsDisplay((state) => !state)
-              }} >
-              Logout <TbLogout className="logoutIcon" />
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
+        <button
+          className="user"
+          onClick={() => setOptionsDisplay((state) => !state)}
+          title="User Settings"
+        >
+          <FaUserCircle className="userIcon" />
+        </button>
+        <p>{nickname}</p>
+        {optionsDisplay && (
+          <div className="userOptions">
+            <ul>
+              <li>{nickname}</li>
+              <li onClick={() => setOptionsDisplay((state) => !state)}>
+                <Link to="/changedata">Change Data</Link>
+              </li>
+              <li onClick={() => {
+                  removeCookie();
+                  setOptionsDisplay((state) => !state)
+                }} >
+                Logout <TbLogout className="logoutIcon" />
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

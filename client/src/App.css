@@ -39,7 +39,7 @@
     --highlight: #4e84fa;
     --skeleton: rgb(54, 54, 54);
     --anime-position: rgb(185, 185, 185);
-    --image: url(../public/White-Mode-Alto.png);
+    --image: url(./assets/White-Mode-Alto.png);
 }
 
 ::-webkit-scrollbar {
