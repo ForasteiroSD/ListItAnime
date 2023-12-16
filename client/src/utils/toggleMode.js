@@ -1,5 +1,5 @@
-import darkLogoImg from "../assets/White-Mode-Alto.png"
-import whiteLogoImg from "../assets/Dark-Mode-Alto.png"
+import darkLogoImg from "../assets/Dark-Mode-Alto.png"
+import whiteLogoImg from "../assets/White-Mode-Alto.png"
 
 export function toggleMode() {
     const root = document.querySelector(':root');

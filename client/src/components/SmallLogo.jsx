@@ -1,5 +1,5 @@
-import darkLogoImg from "../assets/Dark-Mode-Baixo.png"
-import whiteLogoImg from "../assets/White-Mode-Baixo.png"
+import darkLogoImg from "../assets/White-Mode-Baixo.png"
+import whiteLogoImg from "../assets/Dark-Mode-Baixo.png"
 
 //css
 import './SmallLogo.css'
