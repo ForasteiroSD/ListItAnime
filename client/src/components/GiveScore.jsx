@@ -25,7 +25,7 @@ function GiveScore({
       setInfo("Score should be between 0 and 10");
     } else {
       const response = (
-        await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
+        await Axios.get("https://serverlistit.onrender.com/insertToWatchWatched", {
           params: {
             userId: Cookies.get("id"),
             list: "Watched",
@@ -70,7 +70,7 @@ function GiveScore({
       setInfo("Score should be between 0 and 10");
     } else {
       const response = (
-        await Axios.get("http://127.0.0.1:5000/editScore", {
+        await Axios.get("https://serverlistit.onrender.com/editScore", {
           params: {
             userId: Cookies.get("id"),
             animeId: animeId,

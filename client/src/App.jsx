@@ -91,7 +91,7 @@ function App() {
   const getUserData = async () => {
     const response = (
       await Axios.get(
-        "http://127.0.0.1:5000/get/userData?id=" + Cookies.get("id")
+        "https://serverlistit.onrender.com/get/userData?id=" + Cookies.get("id")
       )
     ).data;
     if (response != "Database off, sorry") {

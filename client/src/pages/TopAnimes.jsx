@@ -13,7 +13,7 @@ function TopAnimes() {
   const [animes, setAnimes] = useState()
 
   async function getTopAnimes() {
-    const response = await Axios.post("http://127.0.0.1:5000/get/topAnimes", {userId: Cookies.get('id')});
+    const response = await Axios.post("https://serverlistit.onrender.com/get/topAnimes", {userId: Cookies.get('id')});
     setAnimes(response.data);
   }
 
