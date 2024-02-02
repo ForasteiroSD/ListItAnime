@@ -1,14 +1,14 @@
-//Packages
-import { useState } from "react"
+import darkLogoImg from "../assets/White-Mode-Baixo.png"
+import whiteLogoImg from "../assets/Dark-Mode-Baixo.png"
 
 //css
 import './SmallLogo.css'
 
-let logo = "./src/assets/White-Mode-Baixo.png";
+let logo = darkLogoImg;
 
 export function changeLogoTheme() {
-    if(logo === "./src/assets/Dark-Mode-Baixo.png") logo = "./src/assets/White-Mode-Baixo.png";
-    else logo = "./src/assets/Dark-Mode-Baixo.png";
+    if(logo === darkLogoImg) logo = whiteLogoImg;
+    else logo = darkLogoImg;
 }
 
 export default function SmallLogo() {

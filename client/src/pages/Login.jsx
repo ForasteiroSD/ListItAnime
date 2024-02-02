@@ -23,7 +23,7 @@ function Login() {
     if (inputNickname) nickname = inputNickname.value;
 
     const response = (
-      await Axios.post("http://127.0.0.1:5000/sign", {
+      await Axios.post("https://serverlistit.onrender.com/sign", {
         email: inputEmail.value,
         password: sha256.hmac("lytuhiçjdswxafgqvbjanoikl", inputPassword.value),
         nickname: nickname,

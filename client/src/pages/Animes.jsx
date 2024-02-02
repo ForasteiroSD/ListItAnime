@@ -36,7 +36,7 @@ function Animes() {
   async function getThisSeasonAnimes() {
     setAnimeName("THIS SEASON ANIME...");
     const timeout = setTimeout(async () => {
-      const response = await Axios.get("http://127.0.0.1:5000/animes");
+      const response = await Axios.get("https://serverlistit.onrender.com/animes");
       setAnimes(response.data);
     }, 750);
     setSearchTimeout(timeout);
@@ -45,7 +45,7 @@ function Animes() {
   async function searchAnimes() {
     setAnimeName("SEARCHING...")
     const timeout = setTimeout(async () => {
-      const response = await Axios.get("http://127.0.0.1:5000/search?name=" + buffer.replaceAll(" ", "+"));
+      const response = await Axios.get("https://serverlistit.onrender.com/search?name=" + buffer.replaceAll(" ", "+"));
       if (buffer.length > 30) setAnimeName("RESULTS FOR: " + buffer.slice(0, 31) + "...");
       else setAnimeName("RESULTS FOR: " + buffer);
       setAnimes(response.data);

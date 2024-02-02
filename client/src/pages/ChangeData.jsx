@@ -28,7 +28,7 @@ function ChangeData({ setNickname, setEmail, email, nickname }) {
     const inputNewPassword = document.querySelector("#new_password");
 
     const response = (
-      await Axios.post("http://127.0.0.1:5000/changeData", {
+      await Axios.post("https://serverlistit.onrender.com/changeData", {
         userId: Cookies.get("id"),
         email: inputEmail.value,
         password: sha256.hmac("lytuhiçjdswxafgqvbjanoikl", inputPassword.value),

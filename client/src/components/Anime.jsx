@@ -32,7 +32,7 @@ function Anime({
 
   const getAnime = async (id) => {
     if (!modalOpen) {
-      const response = await Axios.get("http://127.0.0.1:5000/anime?id=" + id);
+      const response = await Axios.get("https://serverlistit.onrender.com/anime?id=" + id);
       setAnime(response.data);
       setModalOpen(true);
       setShow(!show);
@@ -41,7 +41,7 @@ function Anime({
 
   const removeAnime = async (id, list) => {
     const response = (
-      await Axios.get("http://127.0.0.1:5000/removeAnime", {
+      await Axios.get("https://serverlistit.onrender.com/removeAnime", {
         params: { mal_id: id, userId: Cookies.get("id"), listName: list },
       })
     ).data;

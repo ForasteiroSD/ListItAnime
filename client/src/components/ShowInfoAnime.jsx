@@ -24,7 +24,7 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
         setInfoInsert("error");
       } else {
         const response = (
-          await Axios.get("http://127.0.0.1:5000/insertToWatchWatched", {
+          await Axios.get("https://serverlistit.onrender.com/insertToWatchWatched", {
             params: { userId: Cookies.get("id"), list: list, anime: anime },
           })
         ).data;

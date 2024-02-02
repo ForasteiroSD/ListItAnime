@@ -29,6 +29,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
     --background: #121214;
     --white: black;
@@ -38,7 +39,7 @@
     --highlight: #4e84fa;
     --skeleton: rgb(54, 54, 54);
     --anime-position: rgb(185, 185, 185);
-    --image: url(./src/assets/White-Mode-Alto.png);
+    --image: url(./assets/White-Mode-Alto.png);
 }
 
 ::-webkit-scrollbar {
@@ -65,18 +66,14 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-p {
-    font-family: Raleway;
-}
-
 body {
     margin: 0;
     padding: 0;
     background-color: var(--background);
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
     color: var(--text);
     overflow-x: hidden;
     min-height: calc(100vh - 16px);
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 .toggleMode {
