@@ -74,32 +74,34 @@ function Anime({
             </>
           )}
 
-          <div
-            className="anime"
-            onMouseEnter={() => setShowToWatch(true)}
-            onMouseLeave={() => setShowToWatch(false)}
-          >
-            {showToWatch && (
-              <div className="addWatch">
-                <FaTrashAlt
-                  className="trash-can"
-                  onClick={() => removeAnime(mal_id, "To Watch")}
-                />
-                <button
-                  className="mark-watched"
-                  onClick={() => setMarkWatched(true)}
-                >
-                  Mark as Watched
-                </button>
-              </div>
-            )}
+          <div className="anime">
+            <div
+              className="anime"
+              onMouseEnter={() => setShowToWatch(true)}
+              onMouseLeave={() => setShowToWatch(false)}
+            >
+              {showToWatch && (
+                <div className="addWatch">
+                  <FaTrashAlt
+                    className="trash-can"
+                    onClick={() => removeAnime(mal_id, "To Watch")}
+                  />
+                  <button
+                    className="mark-watched"
+                    onClick={() => setMarkWatched(true)}
+                  >
+                    Mark as Watched
+                  </button>
+                </div>
+              )}
 
-            <div>
-              <figure>
-                <img src={image} alt={title + " image"} />
-              </figure>
-              {title && <p className="text">{title}</p>}
+              <div>
+                <figure>
+                  <img src={image} alt={title + " image"} />
+                </figure>
+              </div>
             </div>
+            {title && <p className="text">{title}</p>}
           </div>
         </>
       ) : watched ? (
