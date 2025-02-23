@@ -32,7 +32,7 @@ function Anime({
 
   const getAnime = async (id) => {
     if (!modalOpen) {
-      const response = await Axios.get("https://serverlistit.onrender.com/anime?id=" + id);
+      const response = await Axios.get("https://list-it-anime-dudh.vercel.app/anime?id=" + id);
       setAnime(response.data);
       setModalOpen(true);
       setShow(!show);
@@ -41,7 +41,7 @@ function Anime({
 
   const removeAnime = async (id, list) => {
     const response = (
-      await Axios.get("https://serverlistit.onrender.com/removeAnime", {
+      await Axios.get("https://list-it-anime-dudh.vercel.app/removeAnime", {
         params: { mal_id: id, userId: Cookies.get("id"), listName: list },
       })
     ).data;

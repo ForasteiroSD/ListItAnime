@@ -24,7 +24,7 @@ function ShowInfoAnime({ anime, setShow, setModalOpen }) {
         setInfoInsert("error");
       } else {
         const response = (
-          await Axios.get("https://serverlistit.onrender.com/insertToWatchWatched", {
+          await Axios.get("https://list-it-anime-dudh.vercel.app/insertToWatchWatched", {
             params: { userId: Cookies.get("id"), list: list, anime: anime },
           })
         ).data;

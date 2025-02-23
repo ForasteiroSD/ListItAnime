@@ -23,7 +23,7 @@ function Login() {
     if (inputNickname) nickname = inputNickname.value;
 
     const response = (
-      await Axios.post("https://serverlistit.onrender.com/sign", {
+      await Axios.post("https://list-it-anime-dudh.vercel.app/sign", {
         email: inputEmail.value,
         password: sha256.hmac("lytuhiçjdswxafgqvbjanoikl", inputPassword.value),
         nickname: nickname,

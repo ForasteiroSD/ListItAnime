@@ -97,7 +97,7 @@ function App() {
   const getUserData = async () => {
     const response = (
       await Axios.get(
-        "https://serverlistit.onrender.com/get/userData?id=" + Cookies.get("id")
+        "https://list-it-anime-dudh.vercel.app/get/userData?id=" + Cookies.get("id")
       )
     ).data;
     if (response != "Database off, sorry") {

@@ -25,7 +25,7 @@ function GiveScore({
       setInfo("Score should be between 0 and 10");
     } else {
       const response = (
-        await Axios.get("https://serverlistit.onrender.com/insertToWatchWatched", {
+        await Axios.get("https://list-it-anime-dudh.vercel.app/insertToWatchWatched", {
           params: {
             userId: Cookies.get("id"),
             list: "Watched",
@@ -70,7 +70,7 @@ function GiveScore({
       setInfo("Score should be between 0 and 10");
     } else {
       const response = (
-        await Axios.get("https://serverlistit.onrender.com/editScore", {
+        await Axios.get("https://list-it-anime-dudh.vercel.app/editScore", {
           params: {
             userId: Cookies.get("id"),
             animeId: animeId,

@@ -25,7 +25,7 @@ function Watched() {
 
   async function getAnimes() {
     const response = (
-      await Axios.get("https://serverlistit.onrender.com/getAnimesList", {
+      await Axios.get("https://list-it-anime-dudh.vercel.app/getAnimesList", {
         params: { userId: Cookies.get("id"), list: "Watched" },
       })
     ).data;
