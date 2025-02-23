@@ -1,25 +1,24 @@
-
 import express from 'express'
 import { Request, Response } from 'express';
 import Axios from 'axios';
 import { PrismaClient } from "@prisma/client";
+import { env } from "node:process";
+
 const cors = require("cors");
-
+const PORT = env.PORT || 5000;
 const app = express();
-
-// const prisma = new PrismaClient({log: ['query']});
 const prisma = new PrismaClient();
 
 app.use(cors());
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(5000, "0.0.0.0", () => {
+app.listen(PORT, () => {
     console.log("Servidor On!");
 });
 
-app.get("/teste", async(req: Request, res: Response) => {
-    res.send("it's all fine");
+app.get("/", async(req: Request, res: Response) => {
+    res.send("Vercel Server");
 });
 
 app.get("/search", async(req: Request, res: Response) => {
