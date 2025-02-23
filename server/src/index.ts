@@ -2,10 +2,13 @@
 import express from 'express'
 import { Request, Response } from 'express';
 import Axios from 'axios';
-import prisma from './lib/prisma';
+import { PrismaClient } from "@prisma/client";
 const cors = require("cors");
 
 const app = express();
+
+// const prisma = new PrismaClient({log: ['query']});
+const prisma = new PrismaClient();
 
 app.use(cors());
 app.use(express.json()); 
