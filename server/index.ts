@@ -397,3 +397,5 @@ app.post("/changeData", async (req: Request, res: Response) => {
         else res.send('Email already in use');
     }
 });
+
+export default app;
