@@ -15,6 +15,10 @@ app.listen(5000, "0.0.0.0", () => {
     console.log("Servidor On!");
 });
 
+app.get("/teste", async(req: Request, res: Response) => {
+    res.send("it's all fine");
+});
+
 app.get("/search", async(req: Request, res: Response) => {
     const { name } = req.query;
 
